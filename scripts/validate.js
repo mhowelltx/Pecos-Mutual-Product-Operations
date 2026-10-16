@@ -36,7 +36,9 @@ function walk(dir, ext) {
 
 // ---------- 1. Front-matter ----------
 const pages = walk(CONTENT, ".md");
-const slugs = new Set(pages.map((f) => path.basename(f, ".md")));
+// Same as Eleventy's fileSlug: an index.md takes its folder's name.
+const slugOf = (f) => (path.basename(f) === "index.md" ? path.basename(path.dirname(f)) : path.basename(f, ".md"));
+const slugs = new Set(pages.map(slugOf));
 
 for (const file of pages) {
   const where = rel(file);

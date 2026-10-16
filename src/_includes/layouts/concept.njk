@@ -10,4 +10,19 @@ layout: layouts/page.njk
     {% include "partials/page-facts.njk" %}
   </div>
 </div>
+{#- A stage overview (index.md in a phase folder) lists the pages under it. -#}
+{%- set kids = collections.all | childrenOf(page.url) %}
+{%- if kids.length %}
+<section class="pm-section pm-section--alt">
+  <div class="pm-container">
+    {% set heading = { eyebrow: "In this stage", title: (phase | phaseLabel) + " playbooks" if phase else "In this section" } %}
+    {% include "partials/section-heading.njk" %}
+    <div class="pm-cards">
+      {%- for item in kids %}
+        {% set card = { title: item.data.title, url: item.url, text: item.data.summary, meta: item.data.type | typeLabel } %}{% include "partials/card.njk" %}
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}
 {% include "partials/related.njk" %}
