@@ -1,0 +1,63 @@
+---
+layout: layouts/base.njk
+---
+{% set masthead = hero %}
+{% include "partials/masthead.njk" %}
+
+<section class="pm-section">
+  <div class="pm-container">
+    {% set heading = sections.workstreams %}{% include "partials/section-heading.njk" %}
+    <div class="pm-cards">
+      {%- for id in ["both", "run", "change"] %}
+        {%- for w in taxonomy.workstreams %}{% if w.id == id %}
+          {% set card = { title: "Operating model" if w.id == "both" else w.label, url: w.url, text: w.summary } %}{% include "partials/card.njk" %}
+        {%- endif %}{% endfor %}
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="pm-section pm-section--alt">
+  <div class="pm-container">
+    {% set heading = sections.lifecycle %}{% include "partials/section-heading.njk" %}
+    <div class="pm-cards">
+      {%- for p in taxonomy.phases %}{% if p.workstream == "change" %}
+        {% set card = { title: p.label, url: p.url, icon: p.icon } %}{% include "partials/card.njk" %}
+      {%- endif %}{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="pm-section pm-section--dark pm-on-dark">
+  <div class="pm-container site-split">
+    <div class="pm-stat">
+      <span class="pm-stat__big">{{ stat.big }}</span>
+      <span class="pm-stat__accent">{{ stat.accent }}</span>
+      <span class="pm-stat__small">{{ stat.small }}</span>
+    </div>
+    <div class="site-split__copy">
+      <h2 class="pm-h2">{{ stat.title }}</h2>
+      <p class="pm-p">{{ stat.text }}</p>
+      {%- if stat.action.url | urlExists(collections.all) %}
+      <p><a class="pm-btn pm-btn--gold" href="{{ stat.action.url }}">{{ stat.action.label }}</a></p>
+      {%- endif %}
+    </div>
+  </div>
+</section>
+
+<section class="pm-section">
+  <div class="pm-container">
+    {% set heading = sections.roles %}{% include "partials/section-heading.njk" %}
+    <div class="pm-cards site-cards--roles">
+      {%- for r in taxonomy.roles %}
+        {% set card = { title: r.label, url: r.url, icon: r.icon } %}{% include "partials/card.njk" %}
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+{%- if content | trim %}
+<section class="pm-section pm-section--alt">
+  <div class="pm-container site-prose site-prose--center">{{ content | safe }}</div>
+</section>
+{%- endif %}

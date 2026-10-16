@@ -1,0 +1,7 @@
+{#- Expects `heading`: { eyebrow, title, text }. -#}
+<div class="pm-section-heading">
+  {%- if heading.eyebrow %}<p class="pm-eyebrow">{{ heading.eyebrow }}</p>{% endif %}
+  <h2 class="pm-h2">{{ heading.title }}</h2>
+  {%- if heading.text %}<p class="pm-p pm-a11y">{{ heading.text }}</p>{% endif %}
+  <div class="pm-divider"><svg viewBox="0 0 21 20" aria-hidden="true" focusable="false"><path d="M10.5 0L12.97 7.65H21L14.5 12.35L17 20L10.5 15.27L4 20L6.5 12.35L0 7.65H8.01Z"/></svg></div>
+</div>

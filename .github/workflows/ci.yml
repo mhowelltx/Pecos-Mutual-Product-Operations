@@ -1,0 +1,27 @@
+# Build check. Cloudflare Pages deploys the site itself (see README → Deploy);
+# this workflow makes sure every push and pull request builds and passes the validator.
+name: Build and validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Summary
+        run: |
+          echo "### Build passed" >> "$GITHUB_STEP_SUMMARY"
+          echo "Pages built: $(find _site -name index.html | wc -l)" >> "$GITHUB_STEP_SUMMARY"

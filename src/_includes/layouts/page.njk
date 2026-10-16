@@ -1,0 +1,11 @@
+---
+layout: layouts/base.njk
+---
+{#- Shared interior wrapper: compact masthead and breadcrumbs. The type layouts use this. -#}
+{%- set ctx = (phase | phaseLabel) or (workstream | workstreamLabel) -%}
+{%- set eyebrow = type | typeLabel -%}
+{%- if ctx and type != "hub" %}{% set eyebrow = eyebrow + " · " + ctx %}{% endif -%}
+{%- set masthead = { eyebrow: eyebrow, lines: headline or [title], text: summary } -%}
+{% include "partials/masthead.njk" %}
+{% include "partials/breadcrumbs.njk" %}
+{{ content | safe }}

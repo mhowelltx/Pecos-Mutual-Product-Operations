@@ -1,0 +1,24 @@
+{#- Masthead. Expects `masthead`: { lines: [..], text, actions: [{label, url, style}], photo: bool, quickLinks: bool }.
+    The last headline line renders gold. -#}
+<section class="pm-masthead pm-root{% if not masthead.photo %} site-masthead--compact{% endif %}">
+  {%- if masthead.photo %}
+  <div class="pm-masthead__photo site-photo-placeholder" role="img" aria-label="Photo placeholder: a licensed documentary photo of people at work goes here"><span>Photo placeholder</span></div>
+  {%- endif %}
+  <div class="pm-container" style="position:relative">
+    <div class="pm-masthead__copy pm-on-dark">
+      {%- if masthead.eyebrow %}<p class="pm-eyebrow">{{ masthead.eyebrow }}</p>{% endif %}
+      <h1 class="pm-h1">
+        {%- for line in masthead.lines -%}
+          {%- if loop.last and masthead.lines.length > 1 %}<span class="pm-hl">{{ line }}</span>{% else %}<span class="site-hl-line">{{ line }}</span>{% endif -%}
+        {%- endfor -%}
+      </h1>
+      {%- if masthead.text %}<p class="pm-p">{{ masthead.text }}</p>{% endif %}
+      {%- if masthead.actions %}
+      <div class="pm-masthead__actions">
+        {%- for a in masthead.actions %}<a class="pm-btn pm-btn--{{ a.style or 'gold' }}" href="{{ a.url }}">{{ a.label }}</a>{% endfor %}
+      </div>
+      {%- endif %}
+    </div>
+    {%- if masthead.quickLinks %}{% include "partials/quicklinks.njk" %}{% endif %}
+  </div>
+</section>

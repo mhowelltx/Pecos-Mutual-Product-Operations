@@ -1,0 +1,19 @@
+{#- Sidebar facts from front-matter: roles, phase, time, inputs, outputs, owner, updated. -#}
+<aside class="site-facts" aria-label="Page facts">
+  <dl>
+    {%- if roles and roles.length %}
+    <dt>Roles</dt>
+    <dd><ul>{% for r in roles %}<li>{% set item = { label: r | roleLabel, url: (r | role).url } %}{% set cls = "" %}{% include "partials/nav-link.njk" %}</li>{% endfor %}</ul></dd>
+    {%- endif %}
+    {%- if phase %}
+    <dt>Phase</dt><dd>{{ phase | phaseLabel }} · {{ workstream | workstreamLabel }}</dd>
+    {%- elif workstream %}
+    <dt>Workstream</dt><dd>{{ workstream | workstreamLabel }}</dd>
+    {%- endif %}
+    {%- if time %}<dt>Time</dt><dd>{{ time }}</dd>{% endif %}
+    {%- if inputs and inputs.length %}<dt>Inputs</dt><dd><ul>{% for i in inputs %}<li>{{ i }}</li>{% endfor %}</ul></dd>{% endif %}
+    {%- if outputs and outputs.length %}<dt>Outputs</dt><dd><ul>{% for o in outputs %}<li>{{ o }}</li>{% endfor %}</ul></dd>{% endif %}
+    {%- if owner %}<dt>Owner</dt><dd>{{ owner }}</dd>{% endif %}
+    {%- if updated %}<dt>Updated</dt><dd><time datetime="{{ updated | isoDate }}">{{ updated | readableDate }}</time></dd>{% endif %}
+  </dl>
+</aside>

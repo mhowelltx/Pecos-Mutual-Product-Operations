@@ -1,0 +1,11 @@
+{#- Expects `card`: { title, url, icon?, text?, meta? }. With an icon it renders the white icon card;
+    without, the midnight text card. Links only when the target page exists. -#}
+{%- set linked = card.url and (card.url | urlExists(collections.all)) -%}
+{%- set tag = "a" if linked else "div" -%}
+<{{ tag }} class="pm-card{% if not card.icon %} pm-card--dark site-card--text{% endif %}{% if not linked %} site-card--soon{% endif %}"{% if linked %} href="{{ card.url }}"{% endif %}>
+  {%- if card.icon %}<img src="/assets/img/icons/{{ card.icon }}.svg" alt="">{% endif %}
+  {%- if card.meta %}<p class="site-card__meta">{{ card.meta }}</p>{% endif %}
+  <h3 class="pm-card__title">{{ card.title }}</h3>
+  {%- if card.text %}<p class="pm-p">{{ card.text }}</p>{% endif %}
+  {%- if not linked %}<p class="site-card__soon">Coming soon</p>{% endif %}
+</{{ tag }}>

@@ -1,0 +1,9 @@
+<nav class="pm-quicklinks" aria-label="Quick links">
+  {%- for q in taxonomy.nav.quickLinks %}
+  {%- if q.url | urlExists(collections.all) %}
+  <a class="pm-quicklink" href="{{ q.url }}"><img src="/assets/img/icons/{{ q.icon }}.svg" alt="">{{ q.label }}</a>
+  {%- else %}
+  <span class="pm-quicklink pm-soon" title="Coming in a later build phase"><img src="/assets/img/icons/{{ q.icon }}.svg" alt="">{{ q.label }}</span>
+  {%- endif %}
+  {%- endfor %}
+</nav>
