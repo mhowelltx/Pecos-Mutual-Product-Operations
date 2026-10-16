@@ -9,7 +9,9 @@ owner: Product Operations
 updated: 2026-10-16
 permalink: /
 hero:
-  photo: true
+  photo:
+    src: /assets/img/photos/masthead-home.webp
+    alt: Three colleagues and Prodbot, a friendly team robot, planning together at a wall of sticky notes in a sunlit office
   quickLinks: true
   lines: ["Playbooks for", "how we run", "and change"]
   text: Everything Product Operations knows about keeping our platforms healthy and delivering strategic change, in one place and written for the role you play.

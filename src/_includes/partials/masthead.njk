@@ -1,7 +1,9 @@
-{#- Masthead. Expects `masthead`: { lines: [..], text, actions: [{label, url, style}], photo: bool, quickLinks: bool }.
-    The last headline line renders gold. -#}
+{#- Masthead. Expects `masthead`: { lines: [..], text, actions: [{label, url, style}], photo, quickLinks: bool }.
+    `photo` is { src, alt } for a real image, or `true` for a marked placeholder. The last headline line renders gold. -#}
 <section class="pm-masthead pm-root{% if not masthead.photo %} site-masthead--compact{% endif %}">
-  {%- if masthead.photo %}
+  {%- if masthead.photo.src %}
+  <div class="pm-masthead__photo site-masthead__photo" role="img" aria-label="{{ masthead.photo.alt }}" style="background-image: url('{{ masthead.photo.src }}')"></div>
+  {%- elif masthead.photo %}
   <div class="pm-masthead__photo site-photo-placeholder" role="img" aria-label="Photo placeholder: a licensed documentary photo of people at work goes here"><span>Photo placeholder</span></div>
   {%- endif %}
   <div class="pm-container" style="position:relative">
