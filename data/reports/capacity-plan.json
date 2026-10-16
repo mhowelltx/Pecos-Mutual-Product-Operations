@@ -1,0 +1,127 @@
+{
+  "demo": true,
+  "asOf": "2026-09-11",
+  "period": "Q4 2026 (six sprints from Oct 5), draft before Quarterly Planning",
+  "source": "Pecos Mutual capacity planning sheet (fictional)",
+  "headline": "Agent Experience and Payments are over capacity",
+  "stat": {
+    "big": "2 teams",
+    "accent": "Over",
+    "small": "capacity for Q4"
+  },
+  "charts": [
+    {
+      "id": "demand-vs-capacity",
+      "type": "grouped-hbar",
+      "title": "Change demand against capacity by Home Team, Q4 (team-sprints)",
+      "summary": "Capacity for Change after the Run allowance, against project plus Discretionary demand. Employer Experience: capacity 8.8, demand 7; Claims Platform: capacity 8, demand 6.5; Agent Experience: capacity 4.4, demand 6; Payments: capacity 4.4, demand 6; Provider Services: capacity 4.4, demand 3; Policy Platform: capacity 8.8, demand 8.5.",
+      "categories": [
+        "Employer Experience",
+        "Claims Platform",
+        "Agent Experience",
+        "Payments",
+        "Provider Services",
+        "Policy Platform"
+      ],
+      "series": [
+        {
+          "name": "Capacity for Change",
+          "values": [
+            8.8,
+            8,
+            4.4,
+            4.4,
+            4.4,
+            8.8
+          ]
+        },
+        {
+          "name": "Demand (projects + Discretionary)",
+          "values": [
+            7,
+            6.5,
+            6,
+            6,
+            3,
+            8.5
+          ]
+        }
+      ]
+    }
+  ],
+  "table": {
+    "caption": "Q4 2026 capacity by Home Team (team-sprints)",
+    "columns": [
+      "Home Team",
+      "Capacity after leave",
+      "Run allowance",
+      "Capacity for Change",
+      "Project demand",
+      "Discretionary",
+      "Total demand",
+      "Spare (+) / short (−)"
+    ],
+    "rows": [
+      [
+        "Employer Experience",
+        11,
+        "2.2 (20%)",
+        8.8,
+        5,
+        2,
+        7,
+        "+1.8"
+      ],
+      [
+        "Claims Platform",
+        11.5,
+        "3.5 (30%)",
+        8,
+        5,
+        1.5,
+        6.5,
+        "+1.5"
+      ],
+      [
+        "Agent Experience",
+        5.5,
+        "1.1 (20%)",
+        4.4,
+        5,
+        1,
+        6,
+        "−1.6"
+      ],
+      [
+        "Payments",
+        5.5,
+        "1.1 (20%)",
+        4.4,
+        5,
+        1,
+        6,
+        "−1.6"
+      ],
+      [
+        "Provider Services",
+        5.5,
+        "1.1 (20%)",
+        4.4,
+        0,
+        3,
+        3,
+        "+1.4"
+      ],
+      [
+        "Policy Platform",
+        11,
+        "2.2 (20%)",
+        8.8,
+        7.5,
+        1,
+        8.5,
+        "+0.3"
+      ]
+    ]
+  }
+}

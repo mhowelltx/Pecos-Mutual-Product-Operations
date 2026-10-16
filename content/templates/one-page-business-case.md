@@ -58,7 +58,7 @@ Copy the block below into the idea log entry.
 ```markdown
 # Business case: Online first report of injury for small employers
 
-**Idea ID:** IDEA-0142  ·  **Date:** 2026-09-02
+**Idea ID:** IDEA-0142  ·  **Date:** 2026-07-02
 **Business Executive sponsor:** VP, Claims (fictional)  ·  **Product Manager:** Claims Experience PM (fictional)
 
 ## The problem
@@ -89,7 +89,7 @@ About 900 staff hours a month saved on re-keying and follow-up, plus faster care
 injured employees.
 
 ## Gate 1 decision
-Accepted, 2026-09-09. Strong sponsor; moves to high-level design review.
+Accepted, 2026-07-09. Strong sponsor; moves to high-level design review.
 ```
 
 All names and figures in this example are fictional.

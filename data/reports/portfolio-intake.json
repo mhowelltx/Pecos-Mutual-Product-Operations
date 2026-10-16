@@ -1,0 +1,295 @@
+{
+  "demo": true,
+  "asOf": "2026-09-04",
+  "period": "Ideas logged Apr 1 to Aug 31, 2026; Q4 2026 ranking",
+  "source": "Pecos Mutual idea log and portfolio scoring sheet (fictional)",
+  "headline": "6 of 12 ranked ideas fit Q4 capacity",
+  "stat": {
+    "big": "6 ideas",
+    "accent": "Ready",
+    "small": "for Q4 planning"
+  },
+  "capacityForecast": 32,
+  "charts": [
+    {
+      "id": "intake-funnel",
+      "type": "hbar",
+      "title": "Ideas by Discovery stage, April to August",
+      "summary": "Ideas logged: 48; Gate 1: Idea accepted: 29; Design reviewed: 22; Sized: 20; Gate 2: Ready for planning: 11. Gate 2 includes 5 projects planned for Q3 and 6 ready for Q4.",
+      "categories": [
+        "Ideas logged",
+        "Gate 1: Idea accepted",
+        "Design reviewed",
+        "Sized",
+        "Gate 2: Ready for planning"
+      ],
+      "values": [
+        48,
+        29,
+        22,
+        20,
+        11
+      ],
+      "labelWidth": 210
+    },
+    {
+      "id": "value-vs-effort",
+      "type": "scatter",
+      "title": "Value against effort, Q4 ranked ideas",
+      "summary": "Value score (business value + time criticality + risk reduction, 3–15) against T-shirt size for 12 ranked ideas. 6 fall above the cut line of 32 team-sprints; 6 fall below it.",
+      "xCategories": [
+        "S",
+        "M",
+        "L"
+      ],
+      "yLabel": "Value score",
+      "groups": [
+        {
+          "id": "above",
+          "name": "Above the cut line (Gate 2)",
+          "class": "ch-s1"
+        },
+        {
+          "id": "below",
+          "name": "Below the cut line",
+          "class": "ch-muted"
+        }
+      ],
+      "points": [
+        {
+          "label": "Payroll audit self-service",
+          "x": "S",
+          "y": 7,
+          "group": "above"
+        },
+        {
+          "label": "Claims document OCR",
+          "x": "M",
+          "y": 10,
+          "group": "above"
+        },
+        {
+          "label": "Fraud signals dashboard",
+          "x": "M",
+          "y": 10,
+          "group": "above"
+        },
+        {
+          "label": "Agent quote status tracker",
+          "x": "M",
+          "y": 9,
+          "group": "above"
+        },
+        {
+          "label": "Premium payment plans",
+          "x": "M",
+          "y": 9,
+          "group": "above"
+        },
+        {
+          "label": "Spanish-language employer portal",
+          "x": "M",
+          "y": 9,
+          "group": "above"
+        },
+        {
+          "label": "Online first report of injury",
+          "x": "L",
+          "y": 12,
+          "group": "below"
+        },
+        {
+          "label": "Provider bill e-submission",
+          "x": "L",
+          "y": 11,
+          "group": "below"
+        },
+        {
+          "label": "Legacy policy admin retirement",
+          "x": "L",
+          "y": 10,
+          "group": "below"
+        },
+        {
+          "label": "Safety resource library",
+          "x": "S",
+          "y": 4,
+          "group": "below"
+        },
+        {
+          "label": "Medical bill review rules",
+          "x": "L",
+          "y": 8,
+          "group": "below"
+        },
+        {
+          "label": "Return-to-work planner",
+          "x": "L",
+          "y": 8,
+          "group": "below"
+        }
+      ]
+    }
+  ],
+  "table": {
+    "caption": "Q4 2026 portfolio ranking (cut line at 32 team-sprints)",
+    "columns": [
+      "Rank",
+      "Idea",
+      "Size",
+      "Value",
+      "Time crit.",
+      "Risk red.",
+      "Score",
+      "Team-sprints (mid)",
+      "Cumulative",
+      "Decision"
+    ],
+    "rows": [
+      [
+        1,
+        "Payroll audit self-service",
+        "S",
+        3,
+        2,
+        2,
+        "3.50",
+        2.5,
+        2.5,
+        "Gate 2: Ready for planning"
+      ],
+      [
+        2,
+        "Claims document OCR",
+        "M",
+        3,
+        3,
+        4,
+        "3.33",
+        5,
+        7.5,
+        "Gate 2: Ready for planning"
+      ],
+      [
+        3,
+        "Fraud signals dashboard",
+        "M",
+        3,
+        2,
+        5,
+        "3.33",
+        5,
+        12.5,
+        "Gate 2: Ready for planning"
+      ],
+      [
+        4,
+        "Agent quote status tracker",
+        "M",
+        4,
+        3,
+        2,
+        "3.00",
+        5,
+        17.5,
+        "Gate 2: Ready for planning"
+      ],
+      [
+        5,
+        "Premium payment plans",
+        "M",
+        4,
+        4,
+        1,
+        "3.00",
+        5,
+        22.5,
+        "Gate 2: Ready for planning"
+      ],
+      [
+        6,
+        "Spanish-language employer portal",
+        "M",
+        4,
+        3,
+        2,
+        "3.00",
+        5,
+        27.5,
+        "Gate 2: Ready for planning"
+      ],
+      [
+        7,
+        "Online first report of injury",
+        "L",
+        4,
+        5,
+        3,
+        "2.40",
+        12.5,
+        40,
+        "Below cut line"
+      ],
+      [
+        8,
+        "Provider bill e-submission",
+        "L",
+        5,
+        3,
+        3,
+        "2.20",
+        12.5,
+        52.5,
+        "Below cut line"
+      ],
+      [
+        9,
+        "Legacy policy admin retirement",
+        "L",
+        2,
+        3,
+        5,
+        "2.00",
+        12.5,
+        65,
+        "Below cut line"
+      ],
+      [
+        10,
+        "Safety resource library",
+        "S",
+        2,
+        1,
+        1,
+        "2.00",
+        2.5,
+        67.5,
+        "Below cut line"
+      ],
+      [
+        11,
+        "Medical bill review rules",
+        "L",
+        3,
+        2,
+        3,
+        "1.60",
+        12.5,
+        80,
+        "Below cut line"
+      ],
+      [
+        12,
+        "Return-to-work planner",
+        "L",
+        4,
+        2,
+        2,
+        "1.60",
+        12.5,
+        92.5,
+        "Below cut line"
+      ]
+    ]
+  }
+}

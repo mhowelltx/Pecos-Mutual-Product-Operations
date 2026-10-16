@@ -1,0 +1,164 @@
+{
+  "demo": true,
+  "asOf": "2026-10-05",
+  "period": "September 2026",
+  "source": "Pecos Mutual monitoring and SLO exports (fictional)",
+  "headline": "Claims Intake used 141% of its error budget",
+  "stat": {
+    "big": "5 of 6",
+    "accent": "Within",
+    "small": "their error budget"
+  },
+  "charts": [
+    {
+      "id": "budget-by-platform",
+      "type": "hbar",
+      "title": "Availability against target: error budget used by platform, September",
+      "summary": "Share of each platform's monthly error budget used. Employer Portal 28%, Claims Intake 141%, Agent Portal 69%, Payments 90%, Provider Billing 12%, Underwriting Workbench 69%. Only Claims Intake went over 100%.",
+      "categories": [
+        "Employer Portal",
+        "Claims Intake",
+        "Agent Portal",
+        "Payments",
+        "Provider Billing",
+        "Underwriting Workbench"
+      ],
+      "values": [
+        28,
+        141,
+        69,
+        90,
+        12,
+        69
+      ],
+      "unit": "%",
+      "target": {
+        "value": 100,
+        "label": "Budget 100%"
+      },
+      "watchAbove": 100,
+      "seriesLabel": "Within budget",
+      "watchLabel": "Over budget"
+    },
+    {
+      "id": "budget-burn",
+      "type": "line",
+      "title": "Error budget burn through September",
+      "summary": "Cumulative share of the monthly error budget used. Claims Intake reached 93% after its Sep 9 incident and 141% after Sep 23. Payments reached 90%.",
+      "categories": [
+        "Sep 1",
+        "Sep 7",
+        "Sep 14",
+        "Sep 21",
+        "Sep 28",
+        "Sep 30"
+      ],
+      "series": [
+        {
+          "name": "Claims Intake",
+          "values": [
+            0,
+            0,
+            93,
+            93,
+            141,
+            141
+          ],
+          "class": "ch-s2"
+        },
+        {
+          "name": "Payments",
+          "values": [
+            0,
+            35,
+            35,
+            90,
+            90,
+            90
+          ],
+          "class": "ch-s1"
+        }
+      ],
+      "unit": "%",
+      "target": {
+        "value": 100,
+        "label": "Budget"
+      }
+    }
+  ],
+  "table": {
+    "caption": "Platform scorecard, September 2026",
+    "columns": [
+      "Platform",
+      "Type",
+      "SLO",
+      "Availability",
+      "Downtime (min)",
+      "Error budget used",
+      "Sev 1–2 incidents",
+      "Status"
+    ],
+    "rows": [
+      [
+        "Employer Portal",
+        "Customer-facing",
+        "99.9%",
+        "99.972%",
+        12,
+        "28%",
+        0,
+        "Green"
+      ],
+      [
+        "Claims Intake",
+        "Customer-facing",
+        "99.9%",
+        "99.859%",
+        61,
+        "141%",
+        2,
+        "Red"
+      ],
+      [
+        "Agent Portal",
+        "Customer-facing",
+        "99.9%",
+        "99.931%",
+        30,
+        "69%",
+        1,
+        "Green"
+      ],
+      [
+        "Payments",
+        "Customer-facing",
+        "99.9%",
+        "99.910%",
+        39,
+        "90%",
+        2,
+        "Amber"
+      ],
+      [
+        "Provider Billing",
+        "Customer-facing",
+        "99.9%",
+        "99.988%",
+        5,
+        "12%",
+        0,
+        "Green"
+      ],
+      [
+        "Underwriting Workbench",
+        "Internal",
+        "99.5%",
+        "99.653%",
+        150,
+        "69%",
+        1,
+        "Green"
+      ]
+    ]
+  }
+}
