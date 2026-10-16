@@ -9,6 +9,8 @@ const LAYOUT_FOR_TYPE = {
   concept: "concept",
   playbook: "playbook",
   "role-guide": "role",
+  "audience-guide": "audience",
+  "how-to": "how-to",
   report: "report",
   template: "template",
   glossary: "concept",
@@ -16,6 +18,7 @@ const LAYOUT_FOR_TYPE = {
 
 const byId = (list) => Object.fromEntries(list.map((item) => [item.id, item]));
 const ROLES = byId(taxonomy.roles);
+const AUDIENCES = byId(taxonomy.audiences);
 const PHASES = byId(taxonomy.phases);
 const WORKSTREAMS = byId(taxonomy.workstreams);
 const TYPES = byId(taxonomy.types);
@@ -36,6 +39,8 @@ const SEGMENT_LABELS = {
   roles: "Roles",
   reports: "Reports",
   templates: "Templates",
+  "everyone-else": "Everyone else",
+  "how-to": "How-tos",
 };
 
 export default function (eleventyConfig) {
@@ -60,6 +65,14 @@ export default function (eleventyConfig) {
   // Taxonomy lookups
   eleventyConfig.addFilter("roleLabel", (id) => ROLES[id]?.label ?? id);
   eleventyConfig.addFilter("role", (id) => ROLES[id]);
+  eleventyConfig.addFilter("audience", (id) => AUDIENCES[id]);
+  eleventyConfig.addFilter("audienceLabel", (id) => AUDIENCES[id]?.label ?? id);
+  // Pages of the given types tagged with an audience, in workflow order.
+  eleventyConfig.addFilter("forAudience", (all, audience, types = ["playbook", "how-to"]) =>
+    all
+      .filter((p) => types.includes(p.data.type) && (p.data.audiences || []).includes(audience))
+      .sort((a, b) => pageOrder(a) - pageOrder(b) || a.url.localeCompare(b.url)),
+  );
   eleventyConfig.addFilter("phase", (id) => PHASES[id]);
   eleventyConfig.addFilter("phaseLabel", (id) => PHASES[id]?.label ?? "");
   eleventyConfig.addFilter("workstreamLabel", (id) => WORKSTREAMS[id]?.label ?? "");

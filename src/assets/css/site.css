@@ -213,9 +213,24 @@ main:focus { outline: none; }
 .pm-footer .pm-soon { display: block; padding: 6px 0; font-weight: 600; color: var(--body-light); }
 .pm-footer__legal { margin: 24px 0 0; color: var(--body-light); }
 
+/* ---------- Everyone else ---------- */
+.site-center { text-align: center; }
+.site-section-action { margin: var(--space-med) 0 0; }
+.site-subgroup-title { font: 600 18px/1.4 var(--font-body); color: var(--ink); margin: 28px 0 12px; }
+.site-subgroup-title span { font-weight: 500; color: var(--body-accessible); }
+.site-cards--lead { grid-template-columns: 1fr; margin-bottom: var(--space-med); }
+.site-cards--lead .site-card--text { padding: 36px 40px; }
+/* "Everyone else" sits after the five roles, set apart by a hairline. */
+.pm-header__for .site-header__else { padding-left: 14px; border-left: 1px solid var(--border); }
+/* Five roles plus "Everyone else" need ~890px at 15px: one line from 1200px up. */
+.pm-header__for { font-size: 15px; white-space: nowrap; }
+.pm-header__for a, .pm-header__for .pm-soon { margin-left: 12px; }
+
 /* ---------- Tablet and mobile ---------- */
 @media (max-width: 1199px) {
-  .pm-header__for { font-size: 14px; white-space: nowrap; }
+  /* Not enough room beside the logo: the "Just for" row gets its own line underneath. */
+  .pm-header__top { flex-wrap: wrap; row-gap: 10px; }
+  .pm-header__for { font-size: 14px; width: 100%; text-align: right; }
   .pm-header__for a, .pm-header__for .pm-soon { margin-left: 10px; }
   .site-header__logo img { height: 52px; }
 }

@@ -19,6 +19,7 @@ const TYPES = ids(taxonomy.types);
 const WORKSTREAMS = ids(taxonomy.workstreams);
 const PHASES = ids(taxonomy.phases);
 const ROLES = ids(taxonomy.roles);
+const AUDIENCES = ids(taxonomy.audiences);
 const ACTIVITIES = ids(taxonomy.activities);
 const PHASE_WORKSTREAM = new Map(taxonomy.phases.map((p) => [p.id, p.workstream]));
 
@@ -59,6 +60,29 @@ function checkReport(where, data, body) {
   }
   for (const h of ["Summary", "Findings", "Actions"]) {
     if (!new RegExp(`^## ${h}\\s*$`, "m").test(body)) errors.push(`${where}: report body needs a "## ${h}" section`);
+  }
+}
+
+// Everyone else: `audiences` is a separate list from the five `roles`. Optional on any page,
+// required on guides and how-tos, which must also carry their sections.
+const AUDIENCE_SECTIONS = {
+  "audience-guide": ["Who this is for", "Where you show up", "What we need from you", "What you can expect"],
+  "how-to": ["What it's for", "Before you start", "Steps", "What happens next", "Who to contact"],
+};
+const guidesFor = new Set();
+function checkAudiences(where, data, body) {
+  const list = data.audiences;
+  if (list !== undefined && !Array.isArray(list)) errors.push(`${where}: "audiences" must be a list`);
+  for (const a of Array.isArray(list) ? list : []) {
+    if (!AUDIENCES.has(a)) errors.push(`${where}: audience "${a}" is not one of ${[...AUDIENCES].join(", ")}`);
+  }
+  const sections = AUDIENCE_SECTIONS[data.type];
+  if (!sections) return;
+  if (!Array.isArray(list) || !list.length) errors.push(`${where}: a ${data.type} needs a non-empty "audiences" list`);
+  if (data.type === "audience-guide" && list?.length) guidesFor.add(list[0]);
+  for (const h of sections) {
+    const re = new RegExp(`^## ${h.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s*$`, "m");
+    if (!re.test(body)) errors.push(`${where}: ${data.type} body needs a "## ${h}" section`);
   }
 }
 
@@ -115,7 +139,11 @@ for (const file of pages) {
     if (!slugs.has(slug)) warnings.push(`${where}: related page "${slug}" doesn't exist yet`);
   }
   if (data.type === "report") checkReport(where, data, body);
+  checkAudiences(where, data, body);
 }
+
+// Every audience should have a guide. A warning while Release 2 is being built; becomes an error in Phase 2.
+for (const a of AUDIENCES) if (!guidesFor.has(a)) warnings.push(`audience "${a}" has no guide yet (content/everyone-else/${a}.md)`);
 
 // ---------- 2. Internal links ----------
 if (!fs.existsSync(SITE)) {

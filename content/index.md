@@ -30,6 +30,10 @@ sections:
   roles:
     eyebrow: Just for you
     title: Start from the role you play
+  everyoneElse:
+    eyebrow: Everyone else
+    title: Not in a Product role? Start here
+    text: Executives, engineers, claims and service teams, security, finance and more. See where you fit in, what we need from you and how to get things done.
 stat:
   big: "5 roles"
   accent: "Served"

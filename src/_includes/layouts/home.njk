@@ -56,6 +56,22 @@ layout: layouts/base.njk
   </div>
 </section>
 
+{%- if sections.everyoneElse %}
+<section class="pm-section pm-section--alt">
+  <div class="pm-container">
+    {% set heading = sections.everyoneElse %}{% include "partials/section-heading.njk" %}
+    <div class="pm-cards">
+      {%- for a in taxonomy.audiences %}
+        {% set card = { title: a.label, url: a.url, icon: a.icon } %}{% include "partials/card.njk" %}
+      {%- endfor %}
+    </div>
+    {%- if taxonomy.nav.everyoneElse.url | urlExists(collections.all) %}
+    <p class="site-center site-section-action"><a class="pm-btn pm-btn--dark" href="{{ taxonomy.nav.everyoneElse.url }}">See everything</a></p>
+    {%- endif %}
+  </div>
+</section>
+{%- endif %}
+
 {%- if content | trim %}
 <section class="pm-section pm-section--alt">
   <div class="pm-container site-prose site-prose--center">{{ content | safe }}</div>

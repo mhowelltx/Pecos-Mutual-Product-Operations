@@ -54,7 +54,7 @@ npm run build
    ```yaml
    ---
    title: Run a sprint planning session
-   type: playbook            # concept | playbook | role-guide | report | template | glossary | hub | home
+   type: playbook            # concept | playbook | role-guide | audience-guide | how-to | report | template | glossary | hub | home
    workstream: change        # run | change | both
    phase: delivery           # discovery | planning | delivery | incident | platform-health | null
    roles: [scrum-master, product-owner]
@@ -70,12 +70,13 @@ npm run build
    - `headline`: masthead lines; the last line renders gold.
    - `owner` and `updated`: who owns the page and when it last changed.
    - `dataset`: reports only. The name of a file in `data/reports/`.
+   - `audiences`: people outside the five Product roles who take part, from `audiences` in `data/taxonomy.json` (for example `business-executive`, `engineer`). Required on `audience-guide` and `how-to` pages, optional elsewhere. Never put an audience in `roles`.
 
 3. Write the body in plain Markdown. Use the sections the page type needs (see `docs/PLAN.md` → Content model). Markdown isn't run through a template engine, so `{{ }}` in templates is safe.
 4. Run `npm run build` and fix anything the validator reports.
 5. Commit your page **and** the `knowledge/` changes the build made. CI fails a pull request whose `knowledge/` is out of date.
 
-`type` picks the layout automatically. You don't set `layout` yourself. Section pages (`type: hub`, the `index.md` in each folder) list the pages under them automatically. Navigation, the "Just for" role links and the home-page quick links come from `data/taxonomy.json`. Any link to a page that doesn't exist yet shows as greyed-out text instead of a broken link.
+`type` picks the layout automatically. You don't set `layout` yourself. Section pages (`type: hub`, the `index.md` in each folder) list the pages under them automatically. Pages for people outside the five Product roles live in `content/everyone-else/`: one `audience-guide` per audience and short `how-to` pages, each with required sections the validator checks. Navigation, the "Just for" role links and the home-page quick links come from `data/taxonomy.json`. Any link to a page that doesn't exist yet shows as greyed-out text instead of a broken link.
 
 ## Deploy (Cloudflare Pages)
 

@@ -1,8 +1,13 @@
 {#- Sidebar facts from front-matter: roles, phase, time, inputs, outputs, owner, updated. -#}
 <aside class="site-facts" aria-label="Page facts">
   <dl>
+    {%- set audienceFirst = type == "how-to" or type == "audience-guide" %}
+    {%- if audiences and audiences.length %}
+    <dt>{{ "For" if audienceFirst else "Others involved" }}</dt>
+    <dd><ul>{% for a in audiences %}<li>{% set item = { label: a | audienceLabel, url: (a | audience).url } %}{% set cls = "" %}{% include "partials/nav-link.njk" %}</li>{% endfor %}</ul></dd>
+    {%- endif %}
     {%- if roles and roles.length %}
-    <dt>Roles</dt>
+    <dt>{{ "You'll work with" if audienceFirst else "Roles" }}</dt>
     <dd><ul>{% for r in roles %}<li>{% set item = { label: r | roleLabel, url: (r | role).url } %}{% set cls = "" %}{% include "partials/nav-link.njk" %}</li>{% endfor %}</ul></dd>
     {%- endif %}
     {%- if phase %}

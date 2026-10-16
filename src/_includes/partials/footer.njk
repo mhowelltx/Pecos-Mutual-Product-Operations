@@ -9,6 +9,7 @@
       <div>
         <h2 class="site-footer__heading">Just for:</h2>
         {%- for r in taxonomy.roles %}{% set item = { label: r.plural, url: r.url } %}{% set cls = "" %}{% include "partials/nav-link.njk" %}{% endfor %}
+        {%- set item = taxonomy.nav.everyoneElse %}{% set cls = "" %}{% include "partials/nav-link.njk" %}
       </div>
       <div>
         <h2 class="site-footer__heading">Resources:</h2>

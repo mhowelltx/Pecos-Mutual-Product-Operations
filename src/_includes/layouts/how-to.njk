@@ -1,0 +1,15 @@
+---
+layout: layouts/page.njk
+---
+{#- How-to: a short, task-first page for people outside the five Product roles.
+    The sidebar shows who it's for (`audiences`) and the Product roles they'll work with (`roles`). -#}
+<div class="pm-section site-article">
+  <div class="pm-container site-article__grid">
+    <article class="site-prose site-prose--steps">
+      {% include "partials/placeholder-note.njk" %}
+      {{ content | safe }}
+    </article>
+    {% include "partials/page-facts.njk" %}
+  </div>
+</div>
+{% include "partials/related.njk" %}

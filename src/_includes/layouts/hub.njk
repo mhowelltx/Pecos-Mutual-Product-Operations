@@ -32,6 +32,34 @@ layout: layouts/page.njk
           {% set card = { title: r.label, url: r.url, icon: r.icon } %}{% include "partials/card.njk" %}
         {%- endfor %}
       </div>
+    {%- elif groupBy == "audience" %}
+      {%- set overviews = kids | withType("concept") %}
+      {%- if overviews.length %}
+      <div class="pm-cards site-cards--lead">
+        {%- for item in overviews %}
+          {% set card = { title: item.data.title, url: item.url, text: item.data.summary, meta: "Start here" } %}{% include "partials/card.njk" %}
+        {%- endfor %}
+      </div>
+      {%- endif %}
+      <h2 class="site-group-title">Guides</h2>
+      <p class="pm-p pm-a11y site-group-summary">Where you show up, what we need from you and what you can expect from us.</p>
+      <div class="pm-cards">
+        {%- for a in taxonomy.audiences %}
+          {% set card = { title: a.label, url: a.url, icon: a.icon } %}{% include "partials/card.njk" %}
+        {%- endfor %}
+      </div>
+      {%- set howtos = kids | withType("how-to") %}
+      <h2 class="site-group-title">How-tos</h2>
+      <p class="pm-p pm-a11y site-group-summary">Short, step-by-step answers to the things you most often need from Product Operations.</p>
+      {%- if howtos.length %}
+      <div class="pm-cards">
+        {%- for item in howtos %}
+          {% set card = { title: item.data.title, url: item.url, text: item.data.summary, meta: "How-to" } %}{% include "partials/card.njk" %}
+        {%- endfor %}
+      </div>
+      {%- else %}
+      <p class="pm-p pm-a11y site-empty">How-tos arrive in a later build phase.</p>
+      {%- endif %}
     {%- elif kids.length %}
       <div class="pm-cards">
         {%- for item in kids %}
