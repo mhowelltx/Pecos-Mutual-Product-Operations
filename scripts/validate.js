@@ -19,6 +19,7 @@ const WORKSTREAMS = ids(taxonomy.workstreams);
 const PHASES = ids(taxonomy.phases);
 const ROLES = ids(taxonomy.roles);
 const ACTIVITIES = ids(taxonomy.activities);
+const PHASE_WORKSTREAM = new Map(taxonomy.phases.map((p) => [p.id, p.workstream]));
 
 const errors = [];
 const warnings = [];
@@ -63,6 +64,10 @@ for (const file of pages) {
   }
   if ("phase" in data && data.phase !== null && !PHASES.has(data.phase)) {
     errors.push(`${where}: phase "${data.phase}" is not null or one of ${[...PHASES].join(", ")}`);
+  }
+  const phaseWorkstream = PHASE_WORKSTREAM.get(data.phase);
+  if (phaseWorkstream && WORKSTREAMS.has(data.workstream) && data.workstream !== phaseWorkstream) {
+    errors.push(`${where}: phase "${data.phase}" belongs to workstream "${phaseWorkstream}", not "${data.workstream}"`);
   }
   if ("roles" in data) {
     if (!Array.isArray(data.roles) || data.roles.length === 0) {
