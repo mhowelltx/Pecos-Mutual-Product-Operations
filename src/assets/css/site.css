@@ -161,7 +161,7 @@ main:focus { outline: none; }
 }
 
 @media (max-width: 1023px) {
-  .site-article__grid { grid-template-columns: 1fr; gap: var(--space-med); }
+  .site-article__grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-med); }
   .site-facts { position: static; }
   .site-split { grid-template-columns: 1fr; gap: var(--space-med); }
   .pm-cards { grid-template-columns: repeat(2, 1fr); }

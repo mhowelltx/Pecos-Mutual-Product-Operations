@@ -18,6 +18,9 @@ const ROLES = byId(taxonomy.roles);
 const PHASES = byId(taxonomy.phases);
 const WORKSTREAMS = byId(taxonomy.workstreams);
 const TYPES = byId(taxonomy.types);
+const ACTIVITY_ORDER = new Map(taxonomy.activities.map((a, i) => [a.id, i]));
+const pageOrder = (p) =>
+  p.inputPath.endsWith("index.md") ? -1 : ACTIVITY_ORDER.get(p.data.activity) ?? ACTIVITY_ORDER.size;
 
 // Labels for URL segments, used by breadcrumbs.
 const SEGMENT_LABELS = {
@@ -41,6 +44,12 @@ export default function (eleventyConfig) {
   // Glossary terms use Markdown definition lists (Term / : definition).
   eleventyConfig.amendLibrary("md", (md) => md.use(markdownItDeflist));
 
+  // Wrap Markdown tables so wide ones scroll on their own instead of widening the page.
+  eleventyConfig.amendLibrary("md", (md) => {
+    md.renderer.rules.table_open = () => '<div class="site-table-wrap" tabindex="0">\n<table>\n';
+    md.renderer.rules.table_close = () => "</table>\n</div>\n";
+  });
+
   eleventyConfig.addGlobalData("eleventyComputed.layout", () => (data) => {
     if (data.layout) return data.layout;
     const name = LAYOUT_FOR_TYPE[data.type];
@@ -60,10 +69,11 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("pageBySlug", (slug, all) =>
     all.find((p) => p.fileSlug === slug && p.data.type !== "hub"),
   );
+  // Overviews first, then playbooks in taxonomy activity order (the order the work happens), then by URL.
   eleventyConfig.addFilter("childrenOf", (all, url) =>
     all
       .filter((p) => p.url !== url && p.url.startsWith(url) && p.data.type !== "hub")
-      .sort((a, b) => a.url.localeCompare(b.url)),
+      .sort((a, b) => pageOrder(a) - pageOrder(b) || a.url.localeCompare(b.url)),
   );
   eleventyConfig.addFilter("withPhase", (pages, phase) => pages.filter((p) => p.data.phase === phase));
   eleventyConfig.addFilter("withType", (pages, type) => pages.filter((p) => p.data.type === type));

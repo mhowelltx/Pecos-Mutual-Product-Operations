@@ -21,7 +21,7 @@ The demo must show:
 
 | Decision | Choice (confirmed by Mike) |
 | --- | --- |
-| Authoring | Markdown with front-matter, built to static HTML by Eleventy, hosted on GitHub Pages |
+| Authoring | Markdown with front-matter, built to static HTML by Eleventy, hosted on Cloudflare Pages (changed from GitHub Pages, 2026-10-16) |
 | Claude feed | GitHub sync of a `/knowledge` folder plus an index file into a Claude project |
 | Content scope | Representative set, about 36 pages, all fictional |
 | Reports | Static inline SVG charts plus narrative; data also kept as JSON/CSV |
@@ -34,7 +34,7 @@ One Markdown source feeds two outputs: the HTML site for people and the `knowled
 1. **Source:** `content/` holds one `.md` file per page with YAML front-matter. Report data lives in `data/reports/*.json`.
 2. **Build:** Eleventy 3 renders Nunjucks layouts and partials (header, masthead, quick links, cards, footer) into `_site/`. A build helper draws report charts as inline SVG from the JSON, so charts need no JavaScript.
 3. **Knowledge export:** the same build writes `knowledge/`. That's a cleaned copy of each page (front-matter kept, site chrome stripped), one Markdown file per report with its data table, and an index file.
-4. **Publish:** a GitHub Actions workflow builds on every push to `main` and deploys `_site/` to GitHub Pages. It also commits `knowledge/` back when it changes, so the Claude project's GitHub sync sees current files.
+4. **Publish:** Cloudflare Pages builds every push to `main` (and a preview per branch) and serves `_site/`. A GitHub Actions workflow runs the build check, and in Phase 5 also commits `knowledge/` back when it changes, so the Claude project's GitHub sync sees current files.
 
 Styling uses the design system's `tokens.css` and `components/bundle.css`, copied into `src/assets/css/`, with the logo and icon SVGs in `src/assets/img/`. Client-side JavaScript is limited to a Pagefind static search index and a mobile menu toggle.
 
@@ -174,7 +174,7 @@ Pecos-Mutual-Product-Operations/
 
 The work runs in five phases. Each ends with something Mike reviews before the next starts; open one pull request (or branch) per phase.
 
-1. **Scaffold.** Eleventy, layouts and partials, design-system CSS, logo and icons, GitHub Pages workflow, `taxonomy.json`, validator.
+1. **Scaffold.** Eleventy, layouts and partials, design-system CSS, logo and icons, Cloudflare Pages deploy, CI build check, `taxonomy.json`, validator.
    - *Review:* live site with home page, navigation and one placeholder page of each type.
 2. **Operating model and Change.** The 3 operating-model pages and the 14 Discovery, Planning and Delivery pages.
    - *Review:* read-through of the Change journey end to end; correct terms and practices before more content builds on them.
@@ -187,10 +187,10 @@ The work runs in five phases. Each ends with something Mike reviews before the n
 
 ## Open questions and risks
 
-- [ ] **Visibility:** is the repo public? GitHub Pages on a private repo needs a paid GitHub plan.
-- [ ] **Practice language:** does Mike have existing terms or frameworks (PI planning, intake gates, severity definitions) the playbooks should match? Default: common Scrum and ITIL-style terms.
-- [ ] **Home Teams vs project teams:** does Discretionary work by static Home Teams follow the same Discovery → Planning → Delivery stages, lighter, or its own intake path?
-- [ ] **Planning cadence:** should the ~3-month Planning horizon use quarterly increments with a named planning event?
+- [x] **Visibility / hosting:** decided 2026-10-16. Host on Cloudflare Pages through its Git integration, so repo visibility doesn’t matter; `ci.yml` runs the build check.
+- [x] **Practice language:** decided 2026-10-16 (defaults). Plain Scrum terms for Delivery; ITIL-style incident terms (Sev 1–4, incident commander, post-incident review); T-shirt sizes XS–XL; a two-gate Discovery intake: **Gate 1 – Idea accepted** and **Gate 2 – Ready for planning**.
+- [x] **Home Teams vs project teams:** decided 2026-10-16 (default). Discretionary work takes a light intake straight into the Home Team’s own backlog and is delivered with Scrum. Only strategic projects go through full Discovery and Planning.
+- [x] **Planning cadence:** decided 2026-10-16 (default). A fixed quarterly cycle with a one-day **Quarterly Planning** session; Program Managers, Project Managers, Product Owners and Product Managers attend, and Business Executives sign off the plan.
 
 Risks:
 
