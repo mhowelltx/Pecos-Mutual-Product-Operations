@@ -34,7 +34,7 @@ One Markdown source feeds two outputs: the HTML site for people and the `knowled
 1. **Source:** `content/` holds one `.md` file per page with YAML front-matter. Report data lives in `data/reports/*.json`.
 2. **Build:** Eleventy 3 renders Nunjucks layouts and partials (header, masthead, quick links, cards, footer) into `_site/`. A build helper draws report charts as inline SVG from the JSON, so charts need no JavaScript.
 3. **Knowledge export:** the same build writes `knowledge/`. That's a cleaned copy of each page (front-matter kept, site chrome stripped), one Markdown file per report with its data table, and an index file.
-4. **Publish:** Cloudflare Pages builds every push to `main` (and a preview per branch) and serves `_site/`. A GitHub Actions workflow runs the build check, and in Phase 5 also commits `knowledge/` back when it changes, so the Claude project's GitHub sync sees current files.
+4. **Publish:** Cloudflare Pages builds every push to `main` (and a preview per branch) and serves `_site/`. `npm run build` also regenerates `knowledge/`, which is committed with each pull request; CI fails if the committed `knowledge/` is stale, so `main` always holds a current corpus for the Claude project's GitHub sync (decided 2026-10-16, instead of an Action committing back).
 
 Styling uses the design system's `tokens.css` and `components/bundle.css`, copied into `src/assets/css/`, with the logo and icon SVGs in `src/assets/img/`. Client-side JavaScript is limited to a Pagefind static search index and a mobile menu toggle.
 
@@ -118,7 +118,7 @@ The Claude project syncs only the generated `knowledge/` folder from GitHub. Tha
   - If the knowledge base doesn't cover it, say so instead of inventing a practice.
   - For report questions, quote figures from the report's data table with its as-of date.
 
-**Keeping it current:** the GitHub Action regenerates `knowledge/` after each content change, and someone re-syncs the repo in the Claude project. A build check fails if any page is missing `title`, `type`, `summary` or `roles`.
+**Keeping it current:** `npm run build` regenerates `knowledge/`; authors commit it with their content change, CI fails the pull request if it is stale, and someone re-syncs the repo in the Claude project after merge. A build check fails if any page is missing `title`, `type`, `summary` or `roles`.
 
 **Test set:** 15–20 sample questions with expected source files, for example "As a Product Owner, what do I bring to sprint planning?" or "Which report shows incident MTTR trend?". Run them against the Claude project after the first sync.
 
@@ -195,5 +195,5 @@ The work runs in five phases. Each ends with something Mike reviews before the n
 Risks:
 
 - **Fictional-brand bleed:** the look is modeled on a real insurer's public site. All names, figures and copy stay fictional, and the footer marks it as a demo.
-- **Stale Claude knowledge:** GitHub sync is manual in the Claude project; the README and the Action summary remind whoever merges to re-sync.
+- **Stale Claude knowledge:** GitHub sync is manual in the Claude project; the README and the CI summary remind whoever merges to re-sync.
 - **Drift between site and corpus:** avoided by generating both from `content/` and never editing `knowledge/` by hand.

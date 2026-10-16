@@ -1,0 +1,7 @@
+Platform,Type,SLO,Availability,Downtime (min),Error budget used,Sev 1–2 incidents,Status
+Employer Portal,Customer-facing,99.9%,99.972%,12,28%,0,Green
+Claims Intake,Customer-facing,99.9%,99.859%,61,141%,2,Red
+Agent Portal,Customer-facing,99.9%,99.931%,30,69%,1,Green
+Payments,Customer-facing,99.9%,99.910%,39,90%,2,Amber
+Provider Billing,Customer-facing,99.9%,99.988%,5,12%,0,Green
+Underwriting Workbench,Internal,99.5%,99.653%,150,69%,1,Green

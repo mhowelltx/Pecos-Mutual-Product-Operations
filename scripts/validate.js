@@ -138,6 +138,20 @@ if (!fs.existsSync(SITE)) {
   }
 }
 
+// ---------- 3. Knowledge corpus ----------
+// export-knowledge.js runs before this. Check the corpus exists and that every
+// test question points at files that are really there.
+const KNOWLEDGE = path.join(ROOT, "knowledge");
+for (const f of ["00-index.md", "01-glossary.md", "PROJECT_INSTRUCTIONS.md"]) {
+  if (!fs.existsSync(path.join(KNOWLEDGE, f))) errors.push(`knowledge/${f} missing: run npm run build`);
+}
+const tests = JSON.parse(fs.readFileSync(path.join(ROOT, "data/knowledge/test-questions.json"), "utf8"));
+for (const q of tests.questions) {
+  for (const f of q.expect_files) {
+    if (!fs.existsSync(path.join(KNOWLEDGE, f))) errors.push(`data/knowledge/test-questions.json: question ${q.id} expects knowledge/${f}, which doesn't exist`);
+  }
+}
+
 // ---------- Report ----------
 for (const w of warnings) console.warn(`warn  ${w}`);
 for (const e of errors) console.error(`error ${e}`);
