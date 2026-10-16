@@ -1,0 +1,113 @@
+{
+  "about": "Sample questions to run against the Claude project after each sync. Each lists the knowledge/ files a good answer should come from, and what the answer must include. The validator checks that every expected file exists.",
+  "questions": [
+    {
+      "id": 1,
+      "question": "As a Product Owner, what do I bring to sprint planning?",
+      "expect_files": ["playbooks/delivery--sprint-planning.md"],
+      "must_include": ["ordered backlog", "proposed sprint goal", "cites the sprint planning URL"]
+    },
+    {
+      "id": 2,
+      "question": "Which report shows the incident MTTR trend, and what was it in the week of Sep 21?",
+      "expect_files": ["reports/incident-trends.md"],
+      "must_include": ["Incident trends report", "1.4 hours", "as of 2026-10-04", "says it is demo data"]
+    },
+    {
+      "id": 3,
+      "question": "What's the difference between Run work, a strategic project and Discretionary work?",
+      "expect_files": ["concepts/run-change-and-discretionary-work.md"],
+      "must_include": ["Home Team for Discretionary work", "cross-functional project team for strategic projects", "Incident Management and Platform Health for Run"]
+    },
+    {
+      "id": 4,
+      "question": "How do I know if my idea should be Discretionary work instead of a strategic project?",
+      "expect_files": ["concepts/run-change-and-discretionary-work.md"],
+      "must_include": ["one Home Team alone", "size S or smaller", "no new budget"]
+    },
+    {
+      "id": 5,
+      "question": "What happens at Gate 1 and Gate 2?",
+      "expect_files": ["concepts/discovery--overview.md"],
+      "must_include": ["Gate 1: Idea accepted at the intake review", "Gate 2: Ready for planning", "cut line"]
+    },
+    {
+      "id": 6,
+      "question": "What T-shirt size is a project that needs two teams for a quarter?",
+      "expect_files": ["playbooks/discovery--t-shirt-estimation.md"],
+      "must_include": ["L", "7 to 18 team-sprints"]
+    },
+    {
+      "id": 7,
+      "question": "As a Program Manager, how do I run capacity planning, and what is the Run allowance?",
+      "expect_files": ["playbooks/planning--capacity-planning.md"],
+      "must_include": ["20% default", "6 team-sprints per team per quarter", "capacity plan as output"]
+    },
+    {
+      "id": 8,
+      "question": "Who attends Quarterly Planning, and who signs off the plan?",
+      "expect_files": ["playbooks/planning--quarterly-planning.md"],
+      "must_include": ["Program Manager leads", "Business Executives sign off", "confidence vote"]
+    },
+    {
+      "id": 9,
+      "question": "As a Project Manager, what goes into a milestone plan? Is there a template?",
+      "expect_files": ["playbooks/planning--goals-and-milestones.md", "templates/planning--milestone-plan.md"],
+      "must_include": ["2 to 4 goals", "done when", "milestone plan template URL"]
+    },
+    {
+      "id": 10,
+      "question": "What is our Definition of Done?",
+      "expect_files": ["concepts/delivery--overview.md"],
+      "must_include": ["acceptance criteria", "automated tests", "deployed or behind a feature flag"]
+    },
+    {
+      "id": 11,
+      "question": "An alert just fired on the Payments platform. What do I do first?",
+      "expect_files": ["playbooks/incident--triage-and-declare.md", "concepts/incident--overview.md"],
+      "must_include": ["acknowledge within 5 minutes", "set severity, higher when in doubt", "declare the incident"]
+    },
+    {
+      "id": 12,
+      "question": "What's the difference between a Sev 2 and a Sev 3 incident?",
+      "expect_files": ["concepts/incident--overview.md"],
+      "must_include": ["Sev 2 core service badly degraded, 30 minutes 24/7", "Sev 3 non-core or workaround, 4 business hours"]
+    },
+    {
+      "id": 13,
+      "question": "As a Scrum Master, how do I run a post-incident review?",
+      "expect_files": ["playbooks/incident--post-incident-review.md"],
+      "must_include": ["blameless", "within 5 working days", "3 to 5 actions with owners"]
+    },
+    {
+      "id": 14,
+      "question": "Which platform went over its error budget in September, and by how much?",
+      "expect_files": ["reports/platform-health-scorecard.md"],
+      "must_include": ["Claims Intake", "141%", "as of 2026-10-05", "says it is demo data"]
+    },
+    {
+      "id": 15,
+      "question": "Which Home Teams are over capacity in the Q4 plan?",
+      "expect_files": ["reports/capacity-plan.md"],
+      "must_include": ["Agent Experience", "Payments", "1.6 team-sprints short", "as of 2026-09-11"]
+    },
+    {
+      "id": 16,
+      "question": "Why didn't online first report of injury make the Q4 plan?",
+      "expect_files": ["reports/portfolio-intake.md"],
+      "must_include": ["below the cut line of 32 team-sprints", "size L", "Q1 2027"]
+    },
+    {
+      "id": 17,
+      "question": "What playbooks does a Product Manager lead?",
+      "expect_files": ["roles/product-manager.md", "concepts/roles-at-a-glance.md"],
+      "must_include": ["idea intake", "high-level design review", "portfolio prioritization", "monthly platform health review"]
+    },
+    {
+      "id": 18,
+      "question": "How do we do PI Planning in SAFe here?",
+      "expect_files": ["playbooks/planning--quarterly-planning.md"],
+      "must_include": ["says the knowledge base doesn't cover SAFe PI Planning", "points to Quarterly Planning as the closest practice", "doesn't invent a practice"]
+    }
+  ]
+}

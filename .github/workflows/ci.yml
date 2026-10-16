@@ -1,5 +1,6 @@
 # Build check. Cloudflare Pages deploys the site itself (see README → Deploy);
-# this workflow makes sure every push and pull request builds and passes the validator.
+# this workflow makes sure every push and pull request builds, passes the validator,
+# and commits an up-to-date knowledge/ corpus for the Claude project.
 name: Build and validate
 
 on:
@@ -21,7 +22,20 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      - name: Check knowledge/ is up to date
+        run: |
+          if [ -n "$(git status --porcelain -- knowledge/)" ]; then
+            echo "::error::knowledge/ is out of date with content/. Run 'npm run build' and commit the knowledge/ changes."
+            git status --short -- knowledge/
+            git diff --stat -- knowledge/
+            exit 1
+          fi
       - name: Summary
         run: |
           echo "### Build passed" >> "$GITHUB_STEP_SUMMARY"
           echo "Pages built: $(find _site -name index.html | wc -l)" >> "$GITHUB_STEP_SUMMARY"
+          echo "Knowledge files: $(find knowledge -type f | wc -l)" >> "$GITHUB_STEP_SUMMARY"
+          if [ "${{ github.event_name }}" = "push" ]; then
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "**Reminder:** if knowledge/ changed, re-sync the GitHub source in the Claude project." >> "$GITHUB_STEP_SUMMARY"
+          fi

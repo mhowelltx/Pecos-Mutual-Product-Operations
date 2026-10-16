@@ -1,0 +1,2 @@
+# The generated Claude corpus is compared byte-for-byte in CI, so keep LF everywhere.
+knowledge/** text eol=lf

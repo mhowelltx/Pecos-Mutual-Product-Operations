@@ -9,9 +9,10 @@
   },
   "scripts": {
     "start": "eleventy --serve",
-    "build": "npm run clean && eleventy && node scripts/validate.js",
+    "build": "npm run clean && eleventy && node scripts/export-knowledge.js && node scripts/validate.js",
     "validate": "node scripts/validate.js",
-    "clean": "node -e \"require('fs').rmSync('_site',{recursive:true,force:true})\""
+    "clean": "node -e \"require('fs').rmSync('_site',{recursive:true,force:true})\"",
+    "knowledge": "node scripts/export-knowledge.js"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.7",
