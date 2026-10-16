@@ -6,6 +6,7 @@
       {%- for item in taxonomy.roles %}
         {% set item = { label: item.plural, url: item.url } %}{% set cls = "" %}{% include "partials/nav-link.njk" %}
       {%- endfor %}
+      {% set item = taxonomy.nav.everyoneElse %}{% set cls = "site-header__else" %}{% include "partials/nav-link.njk" %}
     </div>
   </div>
   <nav class="pm-header__nav site-nav" id="site-nav" aria-label="Main">
@@ -25,6 +26,7 @@
         {%- for r in taxonomy.roles %}
           {% set item = { label: r.plural, url: r.url } %}{% set cls = "" %}{% include "partials/nav-link.njk" %}
         {%- endfor %}
+        {% set item = taxonomy.nav.everyoneElse %}{% set cls = "" %}{% include "partials/nav-link.njk" %}
       </div>
     </div>
   </nav>

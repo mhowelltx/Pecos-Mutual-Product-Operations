@@ -23,11 +23,14 @@ const site = JSON.parse(read("data/site.json"));
 
 const byId = (list) => Object.fromEntries(list.map((x) => [x.id, x]));
 const ROLES = byId(taxonomy.roles);
+const AUDIENCES = byId(taxonomy.audiences);
 const PHASES = byId(taxonomy.phases);
 const WORKSTREAMS = byId(taxonomy.workstreams);
 const TYPES = byId(taxonomy.types);
-const FOLDER = { concept: "concepts", playbook: "playbooks", "role-guide": "roles", template: "templates", report: "reports" };
+const FOLDER = { concept: "concepts", playbook: "playbooks", "role-guide": "roles", "audience-guide": "audiences", "how-to": "how-to", template: "templates", report: "reports" };
 const SKIP = new Set(["home", "hub"]);
+// Hubs and the home page are navigation; placeholder pages are not real content yet.
+const skipped = (p) => SKIP.has(p.data.type) || Boolean(p.data.placeholder);
 // Front-matter that only shapes the web page.
 const DROP_KEYS = new Set(["headline", "placeholder", "layout", "permalink", "groupBy", "dataset"]);
 
@@ -114,17 +117,18 @@ function outName(p) {
 }
 
 // related: [slug] → knowledge file names, so Claude can open them directly.
-const fileForSlug = new Map(pages.filter((p) => !SKIP.has(p.data.type)).map((p) => [p.slug, outName(p)]));
+const fileForSlug = new Map(pages.filter((p) => !skipped(p)).map((p) => [p.slug, outName(p)]));
 
 const files = new Map(); // relative path → contents
 const index = [];
 
 for (const p of pages) {
-  if (SKIP.has(p.data.type)) continue;
+  if (skipped(p)) continue;
   const name = outName(p);
   const fm = { title: p.data.title };
   for (const [k, v] of Object.entries(p.data)) if (k !== "title" && !DROP_KEYS.has(k)) fm[k] = date(v);
   fm.role_names = (p.data.roles ?? []).map((r) => ROLES[r]?.label ?? r);
+  if (p.data.audiences) fm.audience_names = p.data.audiences.map((a) => AUDIENCES[a]?.label ?? a);
   if (p.data.phase) fm.phase_name = PHASES[p.data.phase]?.label;
   if (p.data.related) fm.related = p.data.related.map((slug) => fileForSlug.get(slug) ?? slug);
   fm.url = site.url + p.url;
@@ -149,14 +153,17 @@ for (const p of pages) {
 
 // ---------- 00-index.md ----------
 const roleList = (ids) => (ids ?? []).map((r) => ROLES[r]?.label ?? r).join(", ");
+// Pages that belong to a stage section; templates, reports and Everyone else pages have their own sections.
+const core = (p) => !["template", "report", "how-to", "audience-guide"].includes(p.data.type) && !p.url.startsWith("/everyone-else/");
 const SECTIONS = [
   ["Operating model", (p) => p.url.startsWith("/operating-model/")],
-  ["Change: Discovery", (p) => p.data.phase === "discovery" && p.data.type !== "template" && p.data.type !== "report"],
-  ["Change: Planning", (p) => p.data.phase === "planning" && p.data.type !== "template" && p.data.type !== "report"],
-  ["Change: Delivery", (p) => p.data.phase === "delivery" && p.data.type !== "template" && p.data.type !== "report"],
-  ["Run: Incident Management", (p) => p.data.phase === "incident" && p.data.type !== "report"],
-  ["Run: Platform Health", (p) => p.data.phase === "platform-health" && p.data.type !== "report"],
+  ["Change: Discovery", (p) => p.data.phase === "discovery" && core(p)],
+  ["Change: Planning", (p) => p.data.phase === "planning" && core(p)],
+  ["Change: Delivery", (p) => p.data.phase === "delivery" && core(p)],
+  ["Run: Incident Management", (p) => p.data.phase === "incident" && core(p)],
+  ["Run: Platform Health", (p) => p.data.phase === "platform-health" && core(p)],
   ["Roles", (p) => p.data.type === "role-guide"],
+  ["Everyone else (people outside the five Product roles)", (p) => p.url.startsWith("/everyone-else/")],
   ["Templates", (p) => p.data.type === "template"],
   ["Reports (fictional demo data)", (p) => p.data.type === "report"],
   ["Reference", (p) => p.data.type === "glossary"],

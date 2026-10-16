@@ -1,0 +1,50 @@
+---
+layout: layouts/page.njk
+---
+{#- Audience guide: for people outside the five Product roles. Lists the how-tos and
+    playbooks tagged with this audience (front-matter `audiences`). -#}
+{%- set audienceId = audiences[0] -%}
+{%- set audienceInfo = audienceId | audience -%}
+<div class="pm-section site-article">
+  <div class="pm-container site-article__grid">
+    <article class="site-prose">
+      {% include "partials/placeholder-note.njk" %}
+      {{ content | safe }}
+    </article>
+    {% include "partials/page-facts.njk" %}
+  </div>
+</div>
+
+<section class="pm-section pm-section--alt">
+  <div class="pm-container">
+    {% set heading = { eyebrow: "Your how-tos", title: "What " + audienceInfo.plural + " do with us" } %}
+    {% include "partials/section-heading.njk" %}
+    {%- set howtos = collections.all | forAudience(audienceId, ["how-to"]) %}
+    {%- if howtos.length %}
+      <div class="pm-cards">
+        {%- for item in howtos %}
+          {% set card = { title: item.data.title, url: item.url, text: item.data.summary, meta: "How-to" } %}{% include "partials/card.njk" %}
+        {%- endfor %}
+      </div>
+    {%- else %}
+      <p class="pm-p pm-a11y site-empty site-center">How-tos for this audience arrive in a later build phase.</p>
+    {%- endif %}
+
+    {%- set mine = collections.all | forAudience(audienceId, ["playbook"]) %}
+    {%- if mine.length %}
+      <h3 class="site-group-title">Playbooks you take part in</h3>
+      {%- for p in taxonomy.phases %}
+        {%- set inPhase = mine | withPhase(p.id) %}
+        {%- if inPhase.length %}
+        <h4 class="site-subgroup-title">{{ p.label }} <span>· {{ p.workstream | workstreamLabel }}</span></h4>
+        <div class="pm-cards">
+          {%- for item in inPhase %}
+            {% set card = { title: item.data.title, url: item.url, text: item.data.summary, meta: "Playbook" } %}{% include "partials/card.njk" %}
+          {%- endfor %}
+        </div>
+        {%- endif %}
+      {%- endfor %}
+    {%- endif %}
+  </div>
+</section>
+{% include "partials/related.njk" %}
