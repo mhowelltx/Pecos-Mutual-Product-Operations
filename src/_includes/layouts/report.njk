@@ -13,7 +13,7 @@ layout: layouts/page.njk
     <div class="site-split__copy">
       <p class="site-demo-badge">Demo data</p>
       <h2 class="pm-h2">{{ d.headline }}</h2>
-      <p class="pm-p">As of {{ d.asOf | readableDate }}. Source: {{ d.source }}.</p>
+      <p class="pm-p">{% if d.period %}{{ d.period }}. {% endif %}As of {{ d.asOf | readableDate }}. Source: {{ d.source }}.</p>
     </div>
   </div>
 </section>
@@ -22,13 +22,18 @@ layout: layouts/page.njk
   <div class="pm-container site-article__grid">
     <article class="site-prose">
       {% include "partials/placeholder-note.njk" %}
+      {#- Body order: Summary, then the charts, then Findings and Actions. -#}
+      {%- set parts = content | splitBeforeHeading("Findings") %}
+      {{ parts[0] | safe }}
+      <h2 id="charts">Charts</h2>
       {%- for chart in d.charts %}
-      <figure class="site-chart">
-        <div class="site-chart__frame" role="img" aria-label="{{ chart.summary }}"><span>Chart placeholder: {{ chart.title }}</span></div>
-        <figcaption><strong>{{ chart.title }}.</strong> {{ chart.summary }}</figcaption>
+      <figure class="site-chart" id="chart-{{ chart.id }}-figure">
+        <p class="site-chart__title" aria-hidden="true">{{ chart.title }}</p>
+        {{ chart | chart | safe }}
+        <figcaption>{{ chart.summary }} Demo data{% if d.period %}, {{ d.period }}{% endif %}.</figcaption>
       </figure>
       {%- endfor %}
-      {{ content | safe }}
+      {{ parts[1] | safe }}
       <h2 id="data">Data</h2>
       <div class="site-table-wrap" tabindex="0" role="region" aria-label="{{ d.table.caption }}">
         <table>
