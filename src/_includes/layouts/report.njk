@@ -1,0 +1,49 @@
+---
+layout: layouts/page.njk
+---
+{#- `dataset` in front-matter names the file in data/reports/ (without .json). -#}
+{%- set d = reports[dataset] -%}
+<section class="pm-section pm-section--dark pm-on-dark">
+  <div class="pm-container site-split">
+    <div class="pm-stat">
+      <span class="pm-stat__big">{{ d.stat.big }}</span>
+      <span class="pm-stat__accent">{{ d.stat.accent }}</span>
+      <span class="pm-stat__small">{{ d.stat.small }}</span>
+    </div>
+    <div class="site-split__copy">
+      <p class="site-demo-badge">Demo data</p>
+      <h2 class="pm-h2">{{ d.headline }}</h2>
+      <p class="pm-p">As of {{ d.asOf | readableDate }}. Source: {{ d.source }}.</p>
+    </div>
+  </div>
+</section>
+
+<div class="pm-section site-article">
+  <div class="pm-container site-article__grid">
+    <article class="site-prose">
+      {% include "partials/placeholder-note.njk" %}
+      {%- for chart in d.charts %}
+      <figure class="site-chart">
+        <div class="site-chart__frame" role="img" aria-label="{{ chart.summary }}"><span>Chart placeholder: {{ chart.title }}</span></div>
+        <figcaption><strong>{{ chart.title }}.</strong> {{ chart.summary }}</figcaption>
+      </figure>
+      {%- endfor %}
+      {{ content | safe }}
+      <h2 id="data">Data</h2>
+      <div class="site-table-wrap" tabindex="0" role="region" aria-label="{{ d.table.caption }}">
+        <table>
+          <caption>{{ d.table.caption }} (demo data, as of {{ d.asOf | isoDate }})</caption>
+          <thead><tr>{% for c in d.table.columns %}<th scope="col">{{ c }}</th>{% endfor %}</tr></thead>
+          <tbody>
+            {%- for row in d.table.rows %}
+            <tr>{% for cell in row %}{% if loop.first %}<th scope="row">{{ cell }}</th>{% else %}<td>{{ cell }}</td>{% endif %}{% endfor %}</tr>
+            {%- endfor %}
+          </tbody>
+        </table>
+      </div>
+      <p class="site-source">Source: {{ d.source }}. As of {{ d.asOf | readableDate }}. All figures are fictional demo data.</p>
+    </article>
+    {% include "partials/page-facts.njk" %}
+  </div>
+</div>
+{% include "partials/related.njk" %}

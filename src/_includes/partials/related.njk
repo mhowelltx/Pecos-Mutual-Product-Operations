@@ -1,0 +1,19 @@
+{#- Related pages from the `related` front-matter list of page slugs. Slugs without a page yet show as "coming soon". -#}
+{%- if related and related.length %}
+<section class="pm-section pm-section--alt">
+  <div class="pm-container">
+    {% set heading = { eyebrow: "Keep going", title: "Related pages" } %}{% include "partials/section-heading.njk" %}
+    <div class="pm-cards">
+      {%- for slug in related %}
+        {%- set rp = slug | pageBySlug(collections.all) %}
+        {%- if rp %}
+          {% set card = { title: rp.data.title, url: rp.url, text: rp.data.summary, meta: rp.data.type | typeLabel } %}
+        {%- else %}
+          {% set card = { title: slug | replace("-", " ") | capitalize, url: null, text: null } %}
+        {%- endif %}
+        {% include "partials/card.njk" %}
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}

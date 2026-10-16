@@ -1,0 +1,45 @@
+---
+layout: layouts/page.njk
+---
+{#- Section landing page. It lists the pages under its URL automatically.
+    `groupBy: phase` groups them by the taxonomy phases of this page's workstream; `groupBy: role` shows the role cards. -#}
+{%- set kids = collections.all | childrenOf(page.url) %}
+{%- if content | trim %}
+<div class="pm-section site-hub-intro">
+  <div class="pm-container site-prose site-prose--center">{{ content | safe }}</div>
+</div>
+{%- endif %}
+<section class="pm-section pm-section--alt">
+  <div class="pm-container">
+    {%- if groupBy == "phase" %}
+      {%- for p in taxonomy.phases %}{% if p.workstream == workstream %}
+        {%- set inPhase = kids | withPhase(p.id) %}
+        <h2 class="site-group-title">{% if p.url | urlExists(collections.all) %}<a href="{{ p.url }}">{{ p.label }}</a>{% else %}{{ p.label }}{% endif %}</h2>
+        <p class="pm-p pm-a11y site-group-summary">{{ p.summary }}</p>
+        {%- if inPhase.length %}
+        <div class="pm-cards">
+          {%- for item in inPhase %}
+            {% set card = { title: item.data.title, url: item.url, text: item.data.summary, meta: item.data.type | typeLabel } %}{% include "partials/card.njk" %}
+          {%- endfor %}
+        </div>
+        {%- else %}
+        <p class="pm-p pm-a11y site-empty">Pages for {{ p.label }} arrive in a later build phase.</p>
+        {%- endif %}
+      {%- endif %}{% endfor %}
+    {%- elif groupBy == "role" %}
+      <div class="pm-cards site-cards--roles">
+        {%- for r in taxonomy.roles %}
+          {% set card = { title: r.label, url: r.url, icon: r.icon } %}{% include "partials/card.njk" %}
+        {%- endfor %}
+      </div>
+    {%- elif kids.length %}
+      <div class="pm-cards">
+        {%- for item in kids %}
+          {% set card = { title: item.data.title, url: item.url, text: item.data.summary, meta: item.data.type | typeLabel } %}{% include "partials/card.njk" %}
+        {%- endfor %}
+      </div>
+    {%- else %}
+      <p class="pm-p pm-a11y site-empty">Pages for this section arrive in a later build phase.</p>
+    {%- endif %}
+  </div>
+</section>

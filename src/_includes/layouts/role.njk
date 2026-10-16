@@ -1,0 +1,34 @@
+---
+layout: layouts/page.njk
+---
+{%- set roleId = roles[0] -%}
+{%- set roleInfo = roleId | role -%}
+<div class="pm-section site-article">
+  <div class="pm-container site-article__grid">
+    <article class="site-prose">
+      {% include "partials/placeholder-note.njk" %}
+      {{ content | safe }}
+    </article>
+    {% include "partials/page-facts.njk" %}
+  </div>
+</div>
+
+<section class="pm-section pm-section--alt">
+  <div class="pm-container">
+    {% set heading = { eyebrow: "Your playbooks", title: "Where " + roleInfo.plural + " show up" } %}
+    {% include "partials/section-heading.njk" %}
+    {%- set mine = collections.all | forRole(roleId) %}
+    {%- for p in taxonomy.phases %}
+      {%- set inPhase = mine | withPhase(p.id) %}
+      {%- if inPhase.length %}
+      <h3 class="site-group-title">{{ p.label }} <span>· {{ p.workstream | workstreamLabel }}</span></h3>
+      <div class="pm-cards">
+        {%- for item in inPhase %}
+          {% set card = { title: item.data.title, url: item.url, text: item.data.summary } %}{% include "partials/card.njk" %}
+        {%- endfor %}
+      </div>
+      {%- endif %}
+    {%- endfor %}
+    {%- if not mine.length %}<p class="pm-p pm-a11y site-empty">Playbooks for this role arrive in later build phases.</p>{% endif %}
+  </div>
+</section>

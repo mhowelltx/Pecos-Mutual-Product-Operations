@@ -1,0 +1,13 @@
+---
+layout: layouts/page.njk
+---
+<div class="pm-section site-article">
+  <div class="pm-container site-article__grid">
+    <article class="site-prose">
+      {% include "partials/placeholder-note.njk" %}
+      {{ content | safe }}
+    </article>
+    {% include "partials/page-facts.njk" %}
+  </div>
+</div>
+{% include "partials/related.njk" %}

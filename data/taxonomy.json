@@ -1,0 +1,155 @@
+{
+  "types": [
+    { "id": "home", "label": "Home" },
+    { "id": "hub", "label": "Section" },
+    { "id": "concept", "label": "Concept" },
+    { "id": "playbook", "label": "Playbook" },
+    { "id": "role-guide", "label": "Role guide" },
+    { "id": "report", "label": "Report" },
+    { "id": "template", "label": "Template" },
+    { "id": "glossary", "label": "Glossary" }
+  ],
+
+  "workstreams": [
+    {
+      "id": "run",
+      "label": "Run",
+      "url": "/run/",
+      "summary": "Run-the-business work done by teams through Incident Management and Platform Health."
+    },
+    {
+      "id": "change",
+      "label": "Change",
+      "url": "/change/",
+      "summary": "Strategic projects delivered by cross-functional project teams, plus Discretionary work delivered by static Home Teams."
+    },
+    {
+      "id": "both",
+      "label": "Run and Change",
+      "url": "/operating-model/",
+      "summary": "How the whole value delivery system fits together."
+    }
+  ],
+
+  "phases": [
+    {
+      "id": "incident",
+      "label": "Incident Management",
+      "workstream": "run",
+      "url": "/run/incidents/",
+      "summary": "Triage, declare and learn from incidents."
+    },
+    {
+      "id": "platform-health",
+      "label": "Platform Health",
+      "workstream": "run",
+      "url": "/run/platform-health/",
+      "summary": "Keep platforms reliable and review their health every month."
+    },
+    {
+      "id": "discovery",
+      "label": "Discovery",
+      "workstream": "change",
+      "url": "/change/discovery/",
+      "icon": "read-faqs",
+      "summary": "Ideation, estimation and prioritization. Business Executives work with Product Managers."
+    },
+    {
+      "id": "planning",
+      "label": "Planning",
+      "workstream": "change",
+      "url": "/change/planning/",
+      "icon": "report-payroll",
+      "summary": "Resource management, then goals and milestones for delivery within about 3 months."
+    },
+    {
+      "id": "delivery",
+      "label": "Delivery",
+      "workstream": "change",
+      "url": "/change/delivery/",
+      "icon": "safety-hard-hat",
+      "summary": "The project team practices Scrum to deliver the project."
+    }
+  ],
+
+  "roles": [
+    {
+      "id": "scrum-master",
+      "label": "Scrum Master",
+      "plural": "Scrum Masters",
+      "url": "/roles/scrum-master/",
+      "icon": "responsive-service",
+      "summary": "Coaches the team in Scrum and clears impediments."
+    },
+    {
+      "id": "product-owner",
+      "label": "Product Owner",
+      "plural": "Product Owners",
+      "url": "/roles/product-owner/",
+      "icon": "coverage-shield",
+      "summary": "Owns the backlog and the value each sprint delivers."
+    },
+    {
+      "id": "program-manager",
+      "label": "Program Manager",
+      "plural": "Program Managers",
+      "url": "/roles/program-manager/",
+      "icon": "building",
+      "summary": "Connects projects into a portfolio and manages capacity across teams."
+    },
+    {
+      "id": "project-manager",
+      "label": "Project Manager",
+      "plural": "Project Managers",
+      "url": "/roles/project-manager/",
+      "icon": "report-payroll",
+      "summary": "Plans goals and milestones and keeps a project on its path."
+    },
+    {
+      "id": "product-manager",
+      "label": "Product Manager",
+      "plural": "Product Managers",
+      "url": "/roles/product-manager/",
+      "icon": "dividends",
+      "summary": "Shapes ideas with Business Executives and decides what is worth building."
+    }
+  ],
+
+  "activities": [
+    { "id": "triage-and-declare", "label": "Triage and declare an incident", "phase": "incident" },
+    { "id": "post-incident-review", "label": "Post-incident review", "phase": "incident" },
+    { "id": "monthly-health-review", "label": "Monthly platform health review", "phase": "platform-health" },
+    { "id": "idea-intake", "label": "Idea intake and one-page business case", "phase": "discovery" },
+    { "id": "high-level-design-review", "label": "High-level design review", "phase": "discovery" },
+    { "id": "t-shirt-estimation", "label": "T-shirt estimation", "phase": "discovery" },
+    { "id": "portfolio-prioritization", "label": "Portfolio prioritization", "phase": "discovery" },
+    { "id": "capacity-planning", "label": "Resource and capacity planning", "phase": "planning" },
+    { "id": "goals-and-milestones", "label": "Goals and milestones for a ~3-month plan", "phase": "planning" },
+    { "id": "quarterly-planning", "label": "Quarterly planning session", "phase": "planning" },
+    { "id": "backlog-refinement", "label": "Backlog refinement", "phase": "delivery" },
+    { "id": "sprint-planning", "label": "Sprint planning", "phase": "delivery" },
+    { "id": "daily-scrum", "label": "Daily scrum and impediments", "phase": "delivery" },
+    { "id": "sprint-review-retro", "label": "Sprint review and retrospective", "phase": "delivery" }
+  ],
+
+  "nav": {
+    "primary": [
+      { "label": "Operating model", "url": "/operating-model/" },
+      { "label": "Run", "url": "/run/" },
+      { "label": "Change", "url": "/change/" }
+    ],
+    "utility": [
+      { "label": "Reports", "url": "/reports/" },
+      { "label": "Templates", "url": "/templates/" },
+      { "label": "Glossary", "url": "/glossary/" }
+    ],
+    "quickLinks": [
+      { "label": "Declare an Incident", "url": "/run/incidents/triage-and-declare/", "icon": "report-injury" },
+      { "label": "Submit an Idea", "url": "/change/discovery/idea-intake/", "icon": "building" },
+      { "label": "Plan a Sprint", "url": "/change/delivery/sprint-planning/", "icon": "safety-hard-hat" },
+      { "label": "Find Your Role", "url": "/roles/", "icon": "responsive-service" },
+      { "label": "Download Templates", "url": "/templates/", "icon": "download-forms" },
+      { "label": "Read the Glossary", "url": "/glossary/", "icon": "read-faqs" }
+    ]
+  }
+}

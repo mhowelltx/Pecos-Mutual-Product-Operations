@@ -1,0 +1,21 @@
+{
+  "name": "pecos-mutual-product-operations",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Pecos Mutual Product Operations knowledge base (fictional demo site)",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "eleventy --serve",
+    "build": "npm run clean && eleventy && node scripts/validate.js",
+    "validate": "node scripts/validate.js",
+    "clean": "node -e \"require('fs').rmSync('_site',{recursive:true,force:true})\""
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.7",
+    "gray-matter": "^4.0.3",
+    "markdown-it-deflist": "^4.0.0"
+  }
+}

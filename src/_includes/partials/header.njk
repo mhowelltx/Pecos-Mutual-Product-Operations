@@ -1,0 +1,31 @@
+<header class="pm-header pm-root site-header">
+  <div class="pm-container pm-header__top">
+    <a href="/" class="site-header__logo"><img src="/assets/img/logos/pecos-mutual-logo.svg" alt="Pecos Mutual Product Operations home" width="262" height="64"></a>
+    <button class="site-menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <div class="pm-header__for site-header__for">Just for:
+      {%- for item in taxonomy.roles %}
+        {% set item = { label: item.plural, url: item.url } %}{% set cls = "" %}{% include "partials/nav-link.njk" %}
+      {%- endfor %}
+    </div>
+  </div>
+  <nav class="pm-header__nav site-nav" id="site-nav" aria-label="Main">
+    <div class="pm-container">
+      <div class="site-nav__primary">
+        {%- for item in taxonomy.nav.primary %}
+          {% set cls = "" %}{% include "partials/nav-link.njk" %}
+        {%- endfor %}
+      </div>
+      <div class="pm-header__util">
+        {%- for item in taxonomy.nav.utility %}
+          {% set cls = "" %}{% include "partials/nav-link.njk" %}
+        {%- endfor %}
+      </div>
+      <div class="site-nav__roles">
+        <span class="site-nav__label">Just for:</span>
+        {%- for r in taxonomy.roles %}
+          {% set item = { label: r.plural, url: r.url } %}{% set cls = "" %}{% include "partials/nav-link.njk" %}
+        {%- endfor %}
+      </div>
+    </div>
+  </nav>
+</header>

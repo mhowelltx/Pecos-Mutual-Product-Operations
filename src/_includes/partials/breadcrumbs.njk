@@ -1,0 +1,9 @@
+<nav class="site-breadcrumbs" aria-label="Breadcrumb">
+  <div class="pm-container">
+    <ol>
+      {%- for c in page.url | breadcrumbs(title) %}
+      <li>{% if c.url and (c.url | urlExists(collections.all)) %}<a href="{{ c.url }}">{{ c.label }}</a>{% elif c.url %}<span>{{ c.label }}</span>{% else %}<span aria-current="page">{{ c.label }}</span>{% endif %}</li>
+      {%- endfor %}
+    </ol>
+  </div>
+</nav>

@@ -1,0 +1,20 @@
+<footer class="pm-footer pm-root site-footer">
+  <div class="pm-container">
+    <div class="pm-footer__cols">
+      <div><a href="/"><img src="/assets/img/logos/pecos-mutual-logo-reverse.svg" alt="Pecos Mutual Product Operations home" height="56" style="height:56px;width:auto"></a></div>
+      <div>
+        <h2 class="site-footer__heading">Workstreams:</h2>
+        {%- for item in taxonomy.nav.primary %}{% set cls = "" %}{% include "partials/nav-link.njk" %}{% endfor %}
+      </div>
+      <div>
+        <h2 class="site-footer__heading">Just for:</h2>
+        {%- for r in taxonomy.roles %}{% set item = { label: r.plural, url: r.url } %}{% set cls = "" %}{% include "partials/nav-link.njk" %}{% endfor %}
+      </div>
+      <div>
+        <h2 class="site-footer__heading">Resources:</h2>
+        {%- for item in taxonomy.nav.utility %}{% set cls = "" %}{% include "partials/nav-link.njk" %}{% endfor %}
+      </div>
+    </div>
+    <p class="pm-footer__legal">&copy;{% year %} Pecos Mutual. Pecos Mutual is a fictional company created for this demonstration. All names, figures and content on this site are illustrative.</p>
+  </div>
+</footer>

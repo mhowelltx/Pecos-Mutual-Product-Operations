@@ -1,0 +1,7 @@
+{#- Renders a link when the target page exists, otherwise a muted "coming soon" label.
+    Expects: item {label, url}, cls. -#}
+{%- if item.url | urlExists(collections.all) -%}
+<a class="{{ cls }}" href="{{ item.url }}"{% if page.url == item.url or (item.url != "/" and page.url.startsWith(item.url)) %} aria-current="{{ 'page' if page.url == item.url else 'true' }}"{% endif %}>{{ item.label }}</a>
+{%- else -%}
+<span class="{{ cls }} pm-soon" title="Coming in a later build phase">{{ item.label }}</span>
+{%- endif -%}
