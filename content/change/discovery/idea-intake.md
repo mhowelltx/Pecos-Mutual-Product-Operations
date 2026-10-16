@@ -35,7 +35,7 @@ Use this playbook when someone in the business asks for a change that might be a
 
 1. **Log the idea.** Add a line to the idea log with a working title, the sponsor and the date. The Program Manager assigns an ID.
 2. **Meet the sponsor.** Spend 45 minutes on the problem, not the solution: who is affected, what it costs them today and what would change if we fixed it.
-3. **Draft the business case.** Fill in the [one-page business case](/templates/) template. Keep it to one page. If you can't, the idea probably needs splitting.
+3. **Draft the business case.** Fill in the [one-page business case](/templates/one-page-business-case/) template. Keep it to one page. If you can't, the idea probably needs splitting.
 4. **Name the measure of success.** Pick one or two measures you could check within 6 months of delivery, such as "cut first-report-of-injury handling time from 3 days to 1".
 5. **Note the obvious risks and dependencies.** List the platforms and Home Teams the idea touches. You don't need a design yet.
 6. **Send the case ahead.** Share the business case with the intake review attendees at least two working days before the review.

@@ -4,7 +4,7 @@ type: playbook
 workstream: change
 phase: delivery
 activity: backlog-refinement
-roles: [product-owner, scrum-master]
+roles: [product-owner, scrum-master, product-manager]
 summary: How to get the next two sprints' worth of backlog items ready, so sprint planning is about commitment, not discovery.
 headline: ["Backlog", "refinement"]
 inputs: [ordered product backlog, milestone plan, feedback from the last sprint review]
