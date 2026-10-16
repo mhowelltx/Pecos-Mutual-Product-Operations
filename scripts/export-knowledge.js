@@ -15,7 +15,9 @@ import matter from "gray-matter";
 const ROOT = path.resolve(import.meta.dirname, "..");
 const CONTENT = path.join(ROOT, "content");
 const OUT = path.join(ROOT, "knowledge");
-const read = (p) => fs.readFileSync(path.join(ROOT, p), "utf8");
+// Normalise line endings so Windows and Linux checkouts produce identical output.
+const lf = (s) => s.replace(/\r\n/g, "\n");
+const read = (p) => lf(fs.readFileSync(path.join(ROOT, p), "utf8"));
 const taxonomy = JSON.parse(read("data/taxonomy.json"));
 const site = JSON.parse(read("data/site.json"));
 
@@ -96,7 +98,7 @@ function chartTable(c) {
 
 // ---------- Collect pages ----------
 const pages = walk(CONTENT).map((file) => {
-  const { data, content } = matter(fs.readFileSync(file, "utf8"));
+  const { data, content } = matter(lf(fs.readFileSync(file, "utf8")));
   const isIndex = path.basename(file) === "index.md";
   const slug = isIndex ? path.basename(path.dirname(file)) : path.basename(file, ".md");
   return { file, data, body: content.trim(), url: urlOf(file), isIndex, slug };
