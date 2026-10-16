@@ -4,7 +4,7 @@ type: playbook
 workstream: change
 phase: planning
 activity: goals-and-milestones
-roles: [project-manager, product-owner, program-manager]
+roles: [project-manager, product-owner, program-manager, product-manager]
 summary: How to break a staffed project into 2 to 4 goals and a milestone plan the team can deliver within one quarter.
 headline: ["Goals and", "milestones"]
 inputs: [business case and high-level design, project team roster and capacity, ranked portfolio list]

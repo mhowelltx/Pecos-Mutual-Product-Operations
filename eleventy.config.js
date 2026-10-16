@@ -78,7 +78,9 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("withPhase", (pages, phase) => pages.filter((p) => p.data.phase === phase));
   eleventyConfig.addFilter("withType", (pages, type) => pages.filter((p) => p.data.type === type));
   eleventyConfig.addFilter("forRole", (all, role) =>
-    all.filter((p) => p.data.type === "playbook" && (p.data.roles || []).includes(role)),
+    all
+      .filter((p) => p.data.type === "playbook" && (p.data.roles || []).includes(role))
+      .sort((a, b) => pageOrder(a) - pageOrder(b) || a.url.localeCompare(b.url)),
   );
 
   eleventyConfig.addFilter("breadcrumbs", (url, title) => {

@@ -4,7 +4,7 @@ type: playbook
 workstream: change
 phase: delivery
 activity: sprint-review-retro
-roles: [scrum-master, product-owner, project-manager]
+roles: [scrum-master, product-owner, project-manager, product-manager]
 summary: How to show stakeholders what the sprint delivered, update the milestone forecast, and agree one improvement for the next sprint.
 headline: ["Sprint review and", "retrospective"]
 inputs: [done increment, sprint goal, milestone plan, impediment log]
