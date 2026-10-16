@@ -1,0 +1,289 @@
+{
+  "demo": true,
+  "asOf": "2026-09-11",
+  "period": "Q3 2026 strategic projects, after sprint 5 of 6",
+  "source": "Pecos Mutual milestone plans, updated at the sprint 5 reviews (fictional)",
+  "headline": "Two projects are running late",
+  "stat": {
+    "big": "11 of 16",
+    "accent": "On time",
+    "small": "milestones met or forecast"
+  },
+  "charts": [
+    {
+      "id": "milestones",
+      "type": "timeline",
+      "title": "Q3 milestones: planned sprint against done or forecast sprint",
+      "summary": "11 of 16 milestones were met or are forecast in their planned sprint. Late: Agent commission statements online, Statements viewable for pilot agents (S2 to S3); Agent commission statements online, Paper statements switched off (S6 to Q4 S1); Payroll reporting API for large employers, First employer reports by API (S3 to S4); Payroll reporting API for large employers, Validation and error messages (S5 to S6); Payroll reporting API for large employers, Ten employers live (S6 to Q4 S2).",
+      "columns": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
+        "Q4 S1",
+        "Q4 S2"
+      ],
+      "today": {
+        "after": "S5",
+        "label": "Today, end of S5"
+      },
+      "rows": [
+        {
+          "group": "Claims status for injured employees",
+          "label": "Status page live for pilot claims",
+          "planned": "S2",
+          "actual": "S2",
+          "done": true
+        },
+        {
+          "group": "Claims status for injured employees",
+          "label": "Text alerts on status change",
+          "planned": "S4",
+          "actual": "S4",
+          "done": true
+        },
+        {
+          "group": "Claims status for injured employees",
+          "label": "Open to all injured employees",
+          "planned": "S6",
+          "actual": "S6",
+          "done": false
+        },
+        {
+          "group": "Agent commission statements online",
+          "label": "Statements viewable for pilot agents",
+          "planned": "S2",
+          "actual": "S3",
+          "done": true
+        },
+        {
+          "group": "Agent commission statements online",
+          "label": "Downloadable PDF and CSV",
+          "planned": "S4",
+          "actual": "S4",
+          "done": true
+        },
+        {
+          "group": "Agent commission statements online",
+          "label": "Paper statements switched off",
+          "planned": "S6",
+          "actual": "Q4 S1",
+          "done": false
+        },
+        {
+          "group": "Provider portal identity upgrade",
+          "label": "New sign-in for pilot providers",
+          "planned": "S1",
+          "actual": "S1",
+          "done": true
+        },
+        {
+          "group": "Provider portal identity upgrade",
+          "label": "Multi-factor sign-in for all",
+          "planned": "S3",
+          "actual": "S3",
+          "done": true
+        },
+        {
+          "group": "Provider portal identity upgrade",
+          "label": "Old sign-in retired",
+          "planned": "S5",
+          "actual": "S5",
+          "done": true
+        },
+        {
+          "group": "Provider portal identity upgrade",
+          "label": "Access reviews automated",
+          "planned": "S6",
+          "actual": "S6",
+          "done": false
+        },
+        {
+          "group": "Payroll reporting API for large employers",
+          "label": "First employer reports by API",
+          "planned": "S3",
+          "actual": "S4",
+          "done": true
+        },
+        {
+          "group": "Payroll reporting API for large employers",
+          "label": "Validation and error messages",
+          "planned": "S5",
+          "actual": "S6",
+          "done": false
+        },
+        {
+          "group": "Payroll reporting API for large employers",
+          "label": "Ten employers live",
+          "planned": "S6",
+          "actual": "Q4 S2",
+          "done": false
+        },
+        {
+          "group": "Underwriting rules refresh",
+          "label": "Rules inventory and owners",
+          "planned": "S2",
+          "actual": "S2",
+          "done": true
+        },
+        {
+          "group": "Underwriting rules refresh",
+          "label": "Top 40 rules rewritten",
+          "planned": "S4",
+          "actual": "S4",
+          "done": true
+        },
+        {
+          "group": "Underwriting rules refresh",
+          "label": "Old rules engine retired",
+          "planned": "S6",
+          "actual": "S6",
+          "done": false
+        }
+      ]
+    }
+  ],
+  "table": {
+    "caption": "Q3 2026 milestones by project",
+    "columns": [
+      "Project",
+      "Milestone",
+      "Planned",
+      "Done or forecast",
+      "State",
+      "Forecast"
+    ],
+    "rows": [
+      [
+        "Claims status for injured employees",
+        "Status page live for pilot claims",
+        "S2",
+        "S2",
+        "Done",
+        "On time"
+      ],
+      [
+        "Claims status for injured employees",
+        "Text alerts on status change",
+        "S4",
+        "S4",
+        "Done",
+        "On time"
+      ],
+      [
+        "Claims status for injured employees",
+        "Open to all injured employees",
+        "S6",
+        "S6",
+        "Forecast",
+        "On time"
+      ],
+      [
+        "Agent commission statements online",
+        "Statements viewable for pilot agents",
+        "S2",
+        "S3",
+        "Done",
+        "Late"
+      ],
+      [
+        "Agent commission statements online",
+        "Downloadable PDF and CSV",
+        "S4",
+        "S4",
+        "Done",
+        "On time"
+      ],
+      [
+        "Agent commission statements online",
+        "Paper statements switched off",
+        "S6",
+        "Q4 S1",
+        "Forecast",
+        "Late"
+      ],
+      [
+        "Provider portal identity upgrade",
+        "New sign-in for pilot providers",
+        "S1",
+        "S1",
+        "Done",
+        "On time"
+      ],
+      [
+        "Provider portal identity upgrade",
+        "Multi-factor sign-in for all",
+        "S3",
+        "S3",
+        "Done",
+        "On time"
+      ],
+      [
+        "Provider portal identity upgrade",
+        "Old sign-in retired",
+        "S5",
+        "S5",
+        "Done",
+        "On time"
+      ],
+      [
+        "Provider portal identity upgrade",
+        "Access reviews automated",
+        "S6",
+        "S6",
+        "Forecast",
+        "On time"
+      ],
+      [
+        "Payroll reporting API for large employers",
+        "First employer reports by API",
+        "S3",
+        "S4",
+        "Done",
+        "Late"
+      ],
+      [
+        "Payroll reporting API for large employers",
+        "Validation and error messages",
+        "S5",
+        "S6",
+        "Forecast",
+        "Late"
+      ],
+      [
+        "Payroll reporting API for large employers",
+        "Ten employers live",
+        "S6",
+        "Q4 S2",
+        "Forecast",
+        "Late"
+      ],
+      [
+        "Underwriting rules refresh",
+        "Rules inventory and owners",
+        "S2",
+        "S2",
+        "Done",
+        "On time"
+      ],
+      [
+        "Underwriting rules refresh",
+        "Top 40 rules rewritten",
+        "S4",
+        "S4",
+        "Done",
+        "On time"
+      ],
+      [
+        "Underwriting rules refresh",
+        "Old rules engine retired",
+        "S6",
+        "S6",
+        "Forecast",
+        "On time"
+      ]
+    ]
+  }
+}

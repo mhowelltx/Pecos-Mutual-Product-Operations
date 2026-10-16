@@ -6,6 +6,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
+import { renderChart } from "./charts.js";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const CONTENT = path.join(ROOT, "content");
@@ -34,6 +35,33 @@ function walk(dir, ext) {
   });
 }
 
+// Reports: the dataset exists, is marked demo data, has an as-of date, a table whose rows match
+// its columns, and charts the chart helper can draw; the page has its required sections.
+function checkReport(where, data, body) {
+  const file = path.join(ROOT, "data/reports", `${data.dataset}.json`);
+  if (!fs.existsSync(file)) return errors.push(`${where}: report dataset data/reports/${data.dataset}.json not found`);
+  const d = JSON.parse(fs.readFileSync(file, "utf8"));
+  const ds = rel(file);
+  if (d.demo !== true) errors.push(`${ds}: must set "demo": true (all report data is fictional)`);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(d.asOf ?? "")) errors.push(`${ds}: "asOf" must be a yyyy-mm-dd date`);
+  for (const k of ["source", "headline"]) if (!d[k]) errors.push(`${ds}: missing "${k}"`);
+  if (!d.stat?.big || !d.stat?.accent) errors.push(`${ds}: "stat" needs big and accent`);
+  const cols = d.table?.columns?.length;
+  if (!cols || !d.table.rows?.length) errors.push(`${ds}: needs a table with columns and rows`);
+  else d.table.rows.forEach((r, i) => r.length !== cols && errors.push(`${ds}: table row ${i + 1} has ${r.length} cells, expected ${cols}`));
+  if (!d.charts?.length) errors.push(`${ds}: needs at least one chart`);
+  for (const c of d.charts ?? []) {
+    try {
+      renderChart(c);
+    } catch (e) {
+      errors.push(`${ds}: ${e.message}`);
+    }
+  }
+  for (const h of ["Summary", "Findings", "Actions"]) {
+    if (!new RegExp(`^## ${h}\\s*$`, "m").test(body)) errors.push(`${where}: report body needs a "## ${h}" section`);
+  }
+}
+
 // ---------- 1. Front-matter ----------
 const pages = walk(CONTENT, ".md");
 // Same as Eleventy's fileSlug: an index.md takes its folder's name.
@@ -42,9 +70,9 @@ const slugs = new Set(pages.map(slugOf));
 
 for (const file of pages) {
   const where = rel(file);
-  let data;
+  let data, body;
   try {
-    data = matter(fs.readFileSync(file, "utf8")).data;
+    ({ data, content: body } = matter(fs.readFileSync(file, "utf8")));
   } catch (e) {
     errors.push(`${where}: front-matter is not valid YAML (${e.message.split("\n")[0]})`);
     continue;
@@ -86,9 +114,7 @@ for (const file of pages) {
   for (const slug of data.related ?? []) {
     if (!slugs.has(slug)) warnings.push(`${where}: related page "${slug}" doesn't exist yet`);
   }
-  if (data.type === "report" && !fs.existsSync(path.join(ROOT, "data/reports", `${data.dataset}.json`))) {
-    errors.push(`${where}: report dataset data/reports/${data.dataset}.json not found`);
-  }
+  if (data.type === "report") checkReport(where, data, body);
 }
 
 // ---------- 2. Internal links ----------

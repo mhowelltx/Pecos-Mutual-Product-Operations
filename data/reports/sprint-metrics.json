@@ -1,20 +1,134 @@
 {
   "demo": true,
-  "asOf": "2026-10-09",
+  "asOf": "2026-09-25",
+  "period": "Q3 2026, sprints 1 to 6",
   "source": "Pecos Mutual sprint tracker export (fictional)",
   "headline": "Most teams hit their sprint goal",
-  "stat": { "big": "83%", "accent": "Hit", "small": "their sprint goal" },
+  "stat": {
+    "big": "83%",
+    "accent": "Hit",
+    "small": "their sprint goal"
+  },
   "charts": [
-    { "id": "velocity", "type": "line", "title": "Velocity by team", "summary": "Story points completed per sprint for three teams over six sprints. All three stay within a steady band." },
-    { "id": "goal-hit-rate", "type": "bar", "title": "Sprint-goal hit rate", "summary": "Share of sprints where each team met its sprint goal, from 67% to 100%." }
+    {
+      "id": "velocity",
+      "type": "line",
+      "title": "Velocity by team (story points per sprint)",
+      "summary": "Story points completed per sprint. Claims Platform averaged 42; Policy Platform averaged 37; Agent Experience averaged 29. Agent Experience dropped to 20 in sprint 6 while two people worked on an incident.",
+      "categories": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6"
+      ],
+      "series": [
+        {
+          "name": "Claims Platform",
+          "values": [
+            40,
+            43,
+            41,
+            44,
+            42,
+            42
+          ]
+        },
+        {
+          "name": "Policy Platform",
+          "values": [
+            36,
+            38,
+            35,
+            39,
+            37,
+            37
+          ]
+        },
+        {
+          "name": "Agent Experience",
+          "values": [
+            31,
+            30,
+            30,
+            31,
+            32,
+            20
+          ]
+        }
+      ]
+    },
+    {
+      "id": "goal-hit-rate",
+      "type": "hbar",
+      "title": "Sprint-goal hit rate by team, Q3",
+      "summary": "Share of the six Q3 sprints in which each team met its sprint goal. Claims Platform 100%, Policy Platform 83%, Agent Experience 67%.",
+      "categories": [
+        "Claims Platform",
+        "Policy Platform",
+        "Agent Experience"
+      ],
+      "values": [
+        100,
+        83,
+        67
+      ],
+      "unit": "%",
+      "max": 100
+    }
   ],
   "table": {
-    "caption": "Sprint results by team, last six sprints",
-    "columns": ["Team", "Average velocity (points)", "Sprints", "Goals met", "Hit rate"],
+    "caption": "Sprint results by team, Q3 2026",
+    "columns": [
+      "Team",
+      "S1 points",
+      "S2 points",
+      "S3 points",
+      "S4 points",
+      "S5 points",
+      "S6 points",
+      "Average velocity",
+      "Goals met",
+      "Hit rate"
+    ],
     "rows": [
-      ["Claims Experience", 42, 6, 6, "100%"],
-      ["Policy Platform", 37, 6, 5, "83%"],
-      ["Agent Portal", 29, 6, 4, "67%"]
+      [
+        "Claims Platform",
+        40,
+        43,
+        41,
+        44,
+        42,
+        42,
+        42,
+        "6 of 6",
+        "100%"
+      ],
+      [
+        "Policy Platform",
+        36,
+        38,
+        35,
+        39,
+        37,
+        37,
+        37,
+        "5 of 6",
+        "83%"
+      ],
+      [
+        "Agent Experience",
+        31,
+        30,
+        30,
+        31,
+        32,
+        20,
+        29,
+        "4 of 6",
+        "67%"
+      ]
     ]
   }
 }

@@ -142,11 +142,71 @@ main:focus { outline: none; }
 .site-split__copy .pm-p { font-size: 16px; }
 .site-demo-badge { align-self: flex-start; border: 1px solid var(--gold); color: var(--gold); padding: 6px 12px; font: 600 12px/1 var(--font-body); letter-spacing: .12em; text-transform: uppercase; }
 
-/* Report chart placeholders (real inline SVG arrives in Phase 4) */
-.site-chart { margin: 0 0 32px; }
-.site-chart__frame { height: 240px; display: grid; place-items: center; border: 1px dashed var(--rule); background: repeating-linear-gradient(135deg, var(--surface-alt) 0 14px, var(--white) 14px 28px); }
-.site-chart__frame span { background: var(--white); padding: 6px 12px; font: 600 13px/1.4 var(--font-body); color: var(--ink); }
-.site-chart figcaption { margin-top: 10px; font-size: 14px; }
+/* ---------- Charts (inline SVG from scripts/charts.js) ----------
+   Series colours were checked with the dataviz palette validator against white:
+   blue / orange / teal pass every categorical check; midnight fails (reads as near-black),
+   so it is kept for targets and text. Severity uses one blue ramp, dark → light. */
+:root {
+  --chart-1: var(--blue);
+  --chart-2: var(--orange);
+  --chart-3: var(--teal);
+  --chart-muted: var(--body-light);
+  --chart-o1: var(--navy);
+  --chart-o2: var(--blue);
+  --chart-o3: color-mix(in srgb, var(--blue) 70%, var(--white));
+  --chart-o4: color-mix(in srgb, var(--blue) 45%, var(--white));
+  --chart-grid: var(--border);
+  --chart-target: var(--midnight);
+}
+.site-chart { margin: 8px 0 40px; }
+.site-chart__title { font: 600 17px/1.4 var(--font-body); color: var(--ink); margin: 0 0 8px; }
+.site-chart__scroll { overflow-x: auto; }
+.site-chart__svg { display: block; width: 100%; min-width: 560px; height: auto; font-family: var(--font-body); }
+.site-chart figcaption { margin-top: 8px; font-size: 14px; line-height: 1.55; }
+.site-chart__legend { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 20px; margin: 0 0 10px !important; padding: 0; font-size: 13px; color: var(--ink); }
+.site-chart__legend li { display: flex; align-items: center; gap: 8px; margin: 0; }
+.site-chart__key { display: inline-block; flex: none; }
+.site-chart__key--box { width: 12px; height: 12px; border-radius: 2px; background: currentColor; }
+.site-chart__key--dot { width: 10px; height: 10px; border-radius: 50%; background: currentColor; }
+.site-chart__key--line { width: 18px; height: 2px; background: currentColor; }
+.site-chart__key--ring { width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--chart-target); }
+.site-chart__key.ch-s1 { color: var(--chart-1); }
+.site-chart__key.ch-s2 { color: var(--chart-2); }
+.site-chart__key.ch-s3 { color: var(--chart-3); }
+.site-chart__key.ch-muted { color: var(--chart-muted); }
+.site-chart__key.ch-o1 { color: var(--chart-o1); }
+.site-chart__key.ch-o2 { color: var(--chart-o2); }
+.site-chart__key.ch-o3 { color: var(--chart-o3); }
+.site-chart__key.ch-o4 { color: var(--chart-o4); }
+.site-chart__key.ch-target-key { color: var(--chart-target); }
+
+.site-chart__svg .ch-s1 { fill: var(--chart-1); stroke: var(--chart-1); }
+.site-chart__svg .ch-s2 { fill: var(--chart-2); stroke: var(--chart-2); }
+.site-chart__svg .ch-s3 { fill: var(--chart-3); stroke: var(--chart-3); }
+.site-chart__svg .ch-muted { fill: var(--chart-muted); stroke: var(--chart-muted); }
+.site-chart__svg path.ch-s1:not(.ch-line), .site-chart__svg path.ch-s2:not(.ch-line), .site-chart__svg path.ch-s3:not(.ch-line) { stroke: none; }
+.site-chart__svg .ch-line.ch-s1, .site-chart__svg .ch-line.ch-s2, .site-chart__svg .ch-line.ch-s3 { fill: none; }
+.site-chart__svg .ch-o1 { fill: var(--chart-o1); }
+.site-chart__svg .ch-o2 { fill: var(--chart-o2); }
+.site-chart__svg .ch-o3 { fill: var(--chart-o3); }
+.site-chart__svg .ch-o4 { fill: var(--chart-o4); }
+.site-chart__svg .ch-line { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.site-chart__svg .ch-dot, .site-chart__svg .ch-point { stroke: var(--white); stroke-width: 2; }
+.site-chart__svg .ch-planned { fill: var(--white); stroke: var(--chart-target); stroke-width: 2; }
+.site-chart__svg .ch-connector { stroke-width: 2; }
+.site-chart__svg .ch-hit { fill: transparent; }
+.site-chart__svg .ch-grid { stroke: var(--chart-grid); stroke-width: 1; }
+.site-chart__svg .ch-axis { stroke: var(--rule); stroke-width: 1; }
+.site-chart__svg .ch-target { stroke: var(--chart-target); stroke-width: 2; }
+.site-chart__svg text { font-size: 12px; fill: var(--body-accessible); }
+.site-chart__svg .ch-label { fill: var(--ink); font-size: 13px; }
+.site-chart__svg .ch-group { fill: var(--midnight); font-size: 13px; font-weight: 700; }
+.site-chart__svg .ch-value { fill: var(--ink); font-weight: 600; }
+.site-chart__svg .ch-value--small { font-size: 11px; }
+.site-chart__svg .ch-target-label { fill: var(--chart-target); font-weight: 600; }
+@media (forced-colors: active) {
+  .site-chart__svg .ch-s1, .site-chart__svg .ch-s2, .site-chart__svg .ch-s3, .site-chart__svg [class*="ch-o"] { fill: CanvasText; }
+}
 
 /* ---------- Footer ---------- */
 .site-footer__heading { font: 400 20px/28px var(--font-ui); margin: 0 0 6px; color: var(--white); }

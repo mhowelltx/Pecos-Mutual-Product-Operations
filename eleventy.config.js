@@ -1,5 +1,6 @@
 import markdownItDeflist from "markdown-it-deflist";
 import taxonomy from "./data/taxonomy.json" with { type: "json" };
+import { renderChart } from "./scripts/charts.js";
 
 // Front-matter `type` → layout file in src/_includes/layouts/.
 const LAYOUT_FOR_TYPE = {
@@ -82,6 +83,18 @@ export default function (eleventyConfig) {
       .filter((p) => p.data.type === "playbook" && (p.data.roles || []).includes(role))
       .sort((a, b) => pageOrder(a) - pageOrder(b) || a.url.localeCompare(b.url)),
   );
+
+  // Reports: draw a chart spec as inline SVG at build time.
+  eleventyConfig.addFilter("chart", (spec) => renderChart(spec));
+  // Split rendered HTML before an <h2> with the given text, so a layout can place charts between sections.
+  eleventyConfig.addFilter("splitBeforeHeading", (html, heading) => {
+    const at = html.indexOf(`<h2>${heading}</h2>`);
+    return at < 0 ? [html, ""] : [html.slice(0, at), html.slice(at)];
+  });
+  eleventyConfig.addFilter("reportsForRole", (all, role) =>
+    all.filter((p) => p.data.type === "report" && (p.data.roles || []).includes(role)),
+  );
+  eleventyConfig.addWatchTarget("scripts/charts.js");
 
   eleventyConfig.addFilter("breadcrumbs", (url, title) => {
     const parts = url.split("/").filter(Boolean);

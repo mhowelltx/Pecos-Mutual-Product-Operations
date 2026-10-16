@@ -30,5 +30,14 @@ layout: layouts/page.njk
       {%- endif %}
     {%- endfor %}
     {%- if not mine.length %}<p class="pm-p pm-a11y site-empty">Playbooks for this role arrive in later build phases.</p>{% endif %}
+    {%- set myReports = collections.all | reportsForRole(roleId) %}
+    {%- if myReports.length %}
+      <h3 class="site-group-title">Your reports</h3>
+      <div class="pm-cards">
+        {%- for item in myReports %}
+          {% set card = { title: item.data.title, url: item.url, text: item.data.summary, meta: "Report" } %}{% include "partials/card.njk" %}
+        {%- endfor %}
+      </div>
+    {%- endif %}
   </div>
 </section>
