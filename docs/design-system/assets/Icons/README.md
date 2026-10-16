@@ -1,0 +1,1 @@
+Original solid-fill icons drawn in the reference site's style, 48×48 viewBox. Plain files are inked `orange` (#e36f1e) for quick links and value cards; `*-blue.svg` files are inked `blue` (#0063b8) for menus and white utility panels. Inks are baked in — pick the file, don't recolour via CSS.

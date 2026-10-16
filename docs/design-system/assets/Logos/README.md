@@ -1,0 +1,1 @@
+Fictional Pecos Mutual logo (spoof brand for demo use). `pecos-mutual-logo.svg` — midnight ink + gold star, for white grounds. `pecos-mutual-logo-reverse.svg` — white ink on a navy emblem, for navy/midnight grounds. `pecos-mutual-mark.svg` — square emblem only (favicon, avatars). Text is outlined to paths, so it renders without fonts.
